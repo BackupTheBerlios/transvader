@@ -54,13 +54,24 @@ Game::Game()
 	/* init keyboard, timer and sound */
 	install_keyboard();
 	install_timer();
+
+	this->fps = 0;
+        this->avg_fps = 1;
+        this->last_fps = 0;
+
+	remove_param_int ( Game::fps_timer, static_cast<void*>(this) );
+        LOCK_VARIABLE(this->fps);
+        LOCK_FUNCTION(Game::fps_timer);
+	install_param_int_ex( Game::fps_timer, static_cast<void*>(this),
+		              SECS_TO_TIMER(1) );
+
 	install_sound ( DIGI_AUTODETECT, MIDI_AUTODETECT, NULL );
-	
 	clear_to_color ( screen, makecol(0, 0, 0) );
 
 	this->setSpeed(80);
 	
 	return;
+
 }
 
 Game::~Game()
@@ -82,6 +93,18 @@ void Game::incSpeedCounter ( void *inst )
 	return;
 }
 END_OF_FUNCTION(incSpeedCounter)
+
+void Game::fps_timer(void *inst)
+{
+        (static_cast<Game*>(inst))->last_fps = (static_cast<Game*>(inst))->fps;
+        (static_cast<Game*>(inst))->fps=0;
+        (static_cast<Game*>(inst))->avg_fps=((static_cast<Game*>(inst))->avg_fps + (static_cast<Game*>(inst))->last_fps )/2;
+
+        return;
+}
+END_OF_STATIC_FUNCTION(fps_timer);
+
+
 
 /*
  * main game loop
@@ -109,6 +132,7 @@ void Game::run()
 		}
 
 		this->updateScreen();
+		this->fps++;
 	}
 
 	return;
@@ -134,14 +158,19 @@ void Game::updateScreen()
 	//clear_bitmap ( screen );
 	
 	/* write debugging information to top of screen */
-	textprintf ( screen, font, 0, 0,
+
+	textprintf ( screen, font, 0, 10,
 		makecol(0, 235, 0),
 		"Cycles left: %d | Angle: %d",
 		this->speedcounter, fixtoi(this->player->angle) );
+
 	
+	/*write current and avreage fps on top of screen*/
+        textprintf(screen,font,0,0,makecol(0,200,0),"FPS: %d  Average FPS: %d", this->last_fps, this->avg_fps);
+
 	/* draw player sprite */
 	this->player->draw ( screen );
-	
+
 	release_bitmap ( screen );
 	
 	return;
@@ -159,5 +188,11 @@ inline void Game::setSpeed ( unsigned short speed )
 
 	return;
 }
+
+//FPS Timer
+
+
+
+
 
 } // namespace TV

@@ -16,10 +16,19 @@ class Game
 {
 	private:
 		volatile unsigned short speedcounter;
+
+
 		static void incSpeedCounter ( void *inst );
+		static void fps_timer(void *inst);
+		int install_param_int(void (*proc)(void *), void *param, int speed);
+
+		volatile int fps;
+                volatile int avg_fps;
+                volatile int last_fps;
+
 
 		Player *player;
-		
+
 		unsigned short speed;
 
 		void updateData();
@@ -28,11 +37,12 @@ class Game
 	public:
 		Game();
 		~Game();
-
+                
 		inline void setSpeed ( unsigned short speed );
+
 		
 		void run();
-		
+
 };
 
 } // namespace TV
