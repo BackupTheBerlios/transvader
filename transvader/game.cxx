@@ -126,6 +126,8 @@ void Game::run()
 	int c = 0;
 
 	this->player = new Player();
+
+	this->display->addSprite ( this->player );
 	
 
 	while ( ( c >> 8 ) != KEY_ESC )
@@ -143,7 +145,6 @@ void Game::run()
 
                         textprintf ( screen, font, 0, 40, 
                 makecol(0, 235, 0), "x %d", this->speedcounter);
-                	this->display->addSprite ( this->player );
                         this->updateData();
 			speedcounter--;
 		}
