@@ -4,32 +4,20 @@
 // This program is distributed under the GNU General Public License, for details read the file LICENSE 
 // at the root of this distribution
 
-#ifndef SPRITE_HXX
-#define SPRITE_HXX
-
-#include <string>
-
-#include <allegro.h>
+#include "player.hxx"
 
 
-namespace TV
+Player ( string location = "data/player/level1.tga" )
+	:
+	Sprite ( location )
 {
+	return;
+}
 
-class Sprite /* base class */
+
+~Player()
 {
-	private:
-		BITMAP *default_image;
-	
-		unsigned short x, y;
-		unsigned short size_x, size_y;
-	
-	public:
-		Sprite ( std::string filename );
-		virtual ~Sprite();
-	
-		virtual void draw ( BITMAP* bitmap ) const;
-};
+	return;
+}
 
-} /* namespace TV */
 
-#endif

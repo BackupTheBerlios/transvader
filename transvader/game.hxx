@@ -29,7 +29,7 @@ class Game
 
 		inline void setSpeed ( unsigned short speed );
 		
-		void run() const;
+		void run();
 		
 };
 

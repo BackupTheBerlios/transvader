@@ -4,32 +4,26 @@
 // This program is distributed under the GNU General Public License, for details read the file LICENSE 
 // at the root of this distribution
 
-#ifndef SPRITE_HXX
-#define SPRITE_HXX
+#ifndef PLAYER_HXX
+#define PLAYER_HXX
 
-#include <string>
-
-#include <allegro.h>
+#include "sprite.hxx"
 
 
 namespace TV
 {
 
-class Sprite /* base class */
+class Player : public Sprite
 {
 	private:
-		BITMAP *default_image;
-	
-		unsigned short x, y;
-		unsigned short size_x, size_y;
 	
 	public:
-		Sprite ( std::string filename );
-		virtual ~Sprite();
+		Player ( std::string location );
+		virtual ~Player();
 	
-		virtual void draw ( BITMAP* bitmap ) const;
-};
+/*not yet*/	//virtual void draw ( BITMAP* bitmap ) const;
+}
 
-} /* namespace TV */
+} // namespace TV
 
 #endif

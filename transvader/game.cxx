@@ -4,9 +4,12 @@
 // This program is distributed under the GNU General Public License, for details read the file LICENSE 
 // at the root of this distribution
 
+#include <iostream>
+
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+
 #include <allegro.h>
 
 #include "exception.hxx"
@@ -28,7 +31,7 @@ Game::Game()
 		
 		sprintf(errmsg, "Could not initialize Allegro (%s)",
 			strerror(errno) );
-		throw Exception(errmsg, ERR_FATAL);
+		throw Exception ( errmsg, ERR_FATAL );
 	}
 	
 	/* init graphics mode */
@@ -39,7 +42,7 @@ Game::Game()
 		sprintf(errmsg, "Could not set graphics mode (%s)",
 			allegro_error );
 			
-		throw Exception(errmsg, ERR_FATAL);
+		throw Exception ( errmsg, ERR_FATAL );
 	}
 
 	/* set configuration variables */
@@ -63,7 +66,7 @@ Game::Game()
 
 	this->setSpeed(1);
 	
-	allegro_message ( "Game::Game(): finished.\n" );
+	std::cout << "Game::Game(): finished.\n" << std::endl ;
 
 	return;
 }
@@ -91,7 +94,7 @@ END_OF_FUNCTION(incSpeedCounter)
 /*
  * main game loop
  */
-void Game::run() const
+void Game::run()
 {
 	int c = 0;
 

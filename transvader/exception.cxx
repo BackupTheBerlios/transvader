@@ -4,9 +4,12 @@
 // This program is distributed under the GNU General Public License, for details read the file LICENSE 
 // at the root of this distribution
 
+#include <iostream>
+
 #include <stdlib.h>		/* abort() */
 #include <string.h>
 #include <stdio.h>
+
 #include <allegro.h>
 
 #include "exception.hxx"
@@ -32,7 +35,7 @@ void Exception::handle() const
 
 	if ( this->severity == ERR_FATAL )
 	{
-		allegro_message ( "transvader: Terminating due to fatal error.\n" );
+		std::cout << "transvader: Terminating due to fatal error.\n" << std::endl ;
 	
 		exit(1);	
 	}
@@ -43,8 +46,8 @@ void Exception::handle() const
 
 void Exception::toConsole() const
 {
-	allegro_message ( "transvader: %s: %s\n", this->getSeverityString(),
-		this->getErrorString() );
+	std::cout << "transvader: " << this->getSeverityString() << ": "
+		<< this->getErrorString() << std::endl ;
 		
 	return;
 }
