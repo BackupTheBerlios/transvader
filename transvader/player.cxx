@@ -56,9 +56,9 @@ void Player::update()
 	
 	delete ( lastBBox );
 	lastBBox = currentBBox;
-	
+
 	this->x += (i+=ftofix(0.1));
-	
+
 	currentBBox = new Rectangle ( fixtoi(this->x), fixtoi(this->y), this->width, this->height );
 	
 	return;

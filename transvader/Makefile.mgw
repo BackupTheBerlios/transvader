@@ -6,7 +6,7 @@
 # read the file LICENSE at the root of this distribution
 
 BIN=transvader.exe
-OBJ=main.o sprite.o player.o exception.o game.o rectangle.o backdrop.o foe.o \
+OBJ=main.o sprite.o player.o exception.o game.o rectangle.o backdrop.o foe.o pageflipper.o \
     	display.o
 SRC=$(OBJ:%.o=%.cxx)
 

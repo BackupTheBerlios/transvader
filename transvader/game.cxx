@@ -33,7 +33,7 @@ Game::Game()
 		throw Exception ( std::string("Could not initialize Allegro (")
 			+ strerror(errno) + std::string(")"), ERR_FATAL );
 	}
-	
+
 	/* init graphics mode */
 	set_color_depth(16);
 	set_color_conversion ( COLORCONV_TOTAL | COLORCONV_DITHER | COLORCONV_KEEP_TRANS );
@@ -69,8 +69,8 @@ Game::Game()
 	clear_to_color ( screen, makecol(0, 0, 0) );
 
 	this->setSpeed(50);
-	
-	this->display = new Display();
+
+	this->display = new Pageflipper(800, 600);
 	
 	return;
 
@@ -126,9 +126,6 @@ void Game::run()
 	int c = 0;
 
 	this->player = new Player();
-
-	this->display->addSprite ( this->player );
-	
 
 	while ( ( c >> 8 ) != KEY_ESC )
 	{

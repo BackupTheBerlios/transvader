@@ -2,33 +2,19 @@
 #define DISPLAY_HXX
 
 
-#include <list>
-
-#include "rectangle.hxx"
-#include "sprite.hxx"
-
 namespace TV
 {
 
 class Display
 {
-	protected:
-		//BITMAP *dblbuffer;
-		std::list <Sprite*> sprites;
-		std::list <Rectangle*> old_sprites;
 
-		void invalidateRect( const Rectangle& );
-		void findRectangles();
+      public:
+        Display();
+	virtual ~Display();
 
-	public:
-		Display();
-		~Display();
-	
-		void addSprite ( Sprite* );
-		
-		void prepare();
-		void optimize();
-		void draw();
+	virtual BITMAP *getBMP() = 0;
+	virtual void draw() = 0;
+
 };
 
 } // namespace TV
