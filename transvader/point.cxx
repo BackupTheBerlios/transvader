@@ -3,7 +3,7 @@
  *
  *  Implements two-dimensional points.
  *
- *  Author: Mark Roesel, Leslie Polzer, 
+ *  Author: Mark Roesel, Leslie Polzer
  *  Created: 2004-06-26 / Last updated: 2004-06-26
  *  
  *  For licensing conditions see the file LICENSE which should be included

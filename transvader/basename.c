@@ -1,3 +1,15 @@
+/******************************************************************************
+ *  basename.c
+ *
+ *  Retrieves the last part of a path string
+ *
+ *  Author: Mark Roesel
+ *  Created: 2004-07-07 / Last updated: 2004-07-09
+ *  
+ *  For licensing conditions see the file LICENSE which should be included
+ *  within this distribution.
+ ******************************************************************************/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -11,7 +23,6 @@ char* basename(const char* path)
 	{
 		return ".";
 	}
-	
 	
 	for (i = strlen(path) - 1; i + 1 ; i--)
 	{
@@ -29,19 +40,4 @@ char* basename(const char* path)
 	}
 	
 	return subString;
-}
-
-
-
-
-
-int main(int argc, char** argv)
-{
-	printf("%s\n", basename("hallo"));
-	printf("%s\n", basename(""));
-	printf("%s\n", basename(0));
-	
-	printf("%s\n", basename("c:/programme/blabla/tmp/hallo"));
-	
-	return(0);	
 }
