@@ -59,7 +59,6 @@ Game::Game()
         this->avg_fps = 1;
         this->last_fps = 0;
 
-	remove_param_int ( Game::fps_timer, static_cast<void*>(this) );
         LOCK_VARIABLE(this->fps);
         LOCK_FUNCTION(Game::fps_timer);
 	install_param_int_ex( Game::fps_timer, static_cast<void*>(this),
@@ -136,6 +135,8 @@ void Game::run()
 		this->updateScreen();
 		this->fps++;
 	}
+
+	delete this->player;
 
 	return;
 }

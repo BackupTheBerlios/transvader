@@ -42,22 +42,22 @@ h(rect.h)
 
 unsigned short Rectangle::getX()
 {
-return(this->x);
+	return(this->x);
 }
 
 unsigned short Rectangle::getY()
 {
-return(this->y);
+	return(this->y);
 }
 
 unsigned short Rectangle::getW()
 {
-return(this->w);
+	return(this->w);
 }
 
 unsigned short Rectangle::getH()
 {
-return(this->h);
+	return(this->h);
 }
 
 Rectangle::~Rectangle()

@@ -3,17 +3,28 @@
 
 
 #include "rectangle.hxx"
-
+#include "sprite.hxx"
 
 namespace TV
 {
 
 class Display
 {
-	Display();
-	~Display();
+	protected:
+		BITMAP *dblbuffer;
+		list <Sprite> sprites;
+		list <Sprite> old_sprites;
+
+		void invalidateRect( const Rectangle& r );
+
+	public:
+		Display();
+		~Display();
 	
-	invalidateRect();
+		void addSprite ( const Sprite& sprite );
+		
+		void prepare();
+		void draw();
 };
 
 } // namespace TV
