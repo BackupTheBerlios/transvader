@@ -45,13 +45,13 @@ Game::Game()
 	set_color_depth(depth);
 	set_color_conversion ( COLORCONV_TOTAL | COLORCONV_DITHER | COLORCONV_KEEP_TRANS );
 	
-	//#ifdef ALLEGRO_VRAM_IS_SINGLE_SURFACE
+	#ifdef ALLEGRO_VRAM_SINGLE_SURFACE
 		int ret = set_gfx_mode ( GFX_AUTODETECT_WINDOWED,
 			res_x, res_y, res_x*2, res_y );
-	/*#else
+	#else
 		int ret = set_gfx_mode ( GFX_AUTODETECT_WINDOWED,
-			800, 600, 0, 0 );
-	#endif*/
+			res_x, res_y, 0, 0 );
+	#endif
 	
 	if ( ret < 0 )
 	{
