@@ -45,6 +45,10 @@ TV::TV()
 	
 	set_color_depth(16);
 	
+	clear_to_color ( screen, makecol16(0, 0, 0) );
+	
+	allegro_message ( "TV::TV(): finished.\n" );
+
 	readkey();
 	
 	return;
@@ -59,5 +63,7 @@ TV::~TV()
 
 void TV::run()
 {
+	
+
 	return;
 }
