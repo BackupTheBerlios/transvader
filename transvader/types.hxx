@@ -11,11 +11,11 @@
 namespace TV
 {
 
-struct POINT
+struct Point
 {
-	short x,y;
+	unsigned short x, y;
 };
 
 } // namespace TV
 
-#endi
+#endif
