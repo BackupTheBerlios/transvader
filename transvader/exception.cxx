@@ -1,6 +1,8 @@
 #include <stdlib.h>		/* abort() */
 #include <string.h>
 #include <stdio.h>
+#include <allegro.h>
+
 #include "exception.hxx"
 
 
@@ -21,7 +23,9 @@ void Exception::handle()
 
 	if ( this->severity == ERR_FATAL )
 	{
-		abort();	
+		allegro_message ( "transvader: Terminating due to fatal error.\n" );
+	
+		exit(1);	
 	}
 	
 	return;
@@ -30,7 +34,7 @@ void Exception::handle()
 
 void Exception::toConsole()
 {
-	printf ( "transvader: %s: %s\n", this->getSeverityString(),
+	allegro_message ( "transvader: %s: %s\n", this->getSeverityString(),
 		this->getErrorString() );
 		
 	return;

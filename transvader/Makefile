@@ -7,8 +7,8 @@ SRC=main.cxx sprite.cxx exception.cxx tv.cxx
 ALLEG_CXXFLAGS=`allegro-config --cflags`
 # linker flags need to be fixed because allegro-config doesn't generate output
 # suitable for explicit (i.e. direct ld-call-wise) linking
-ALLEG_LDFLAGS=`allegro-config --libs|sed -e 's!-Wl,!!'` \
-		-e _mangled_main_address 
+ALLEG_LDFLAGS=`allegro-config --libs` #|sed -e 's!-Wl,!!'` \
+		#-e _mangled_main_address 
 
 CXX=g++
 CXXFLAGS=-ggdb -Wall $(ALLEG_CXXFLAGS)
@@ -24,3 +24,4 @@ clean:
 
 transvader: $(OBJ)
 	$(CXX) $(LDFLAGS) $(OBJ) -o $(BIN)
+

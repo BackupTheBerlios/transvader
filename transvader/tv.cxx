@@ -1,4 +1,6 @@
 #include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 #include <allegro.h>
 
 #include "exception.hxx"
@@ -7,14 +9,20 @@
 
 TV::TV()
 {
-	if ( !allegro_init() )
+	if ( install_allegro ( SYSTEM_AUTODETECT, &errno, atexit ) )
 	{
-		throw Exception("Could not initialize Allegro", ERR_FATAL);
+		char* errmsg = new char[200];
+		
+		sprintf(errmsg, "Could not initialize Allegro (%s)",
+			strerror(errno) );
+		throw Exception(errmsg, ERR_FATAL);
 	}
 	
 	set_window_title("Transvader-DEVEL");
 	
-	return;	
+	
+	
+	return;
 }
 
 TV::~TV()
