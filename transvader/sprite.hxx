@@ -17,7 +17,7 @@ namespace TV
 
 class Sprite /* base class */
 {
-	private:
+	protected:
 		BITMAP *default_image;
 	
 		unsigned short x, y;

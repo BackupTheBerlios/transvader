@@ -21,7 +21,7 @@ class Player : public Sprite
 		Player ( std::string location = "data/player/level1.tga" );
 		virtual ~Player();
 	
-/*not yet*/	//virtual void draw ( BITMAP* bitmap ) const;
+	virtual void draw ( BITMAP* bitmap ) const;
 };
 
 } // namespace TV

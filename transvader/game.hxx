@@ -7,6 +7,8 @@
 #ifndef TV_HXX
 #define TV_HXX
 
+#include "player.hxx"
+
 namespace TV
 {
 
@@ -17,6 +19,8 @@ class Game
 		static void incSpeedCounter ( void *inst );
 
 		BITMAP* dblbuffer;
+
+		Player *player;
 		
 		unsigned short speed;
 

@@ -5,6 +5,7 @@
 // at the root of this distribution
 
 #include <string>
+#include <iostream>
 
 #include "player.hxx"
 
@@ -25,5 +26,12 @@ Player::~Player()
 	return;
 }
 
+
+void Player::draw ( BITMAP* bitmap ) const
+{
+	rotate_sprite ( bitmap, this->default_image, 400, 300, 0 );
+
+	return;
+}
 
 } /* namespace TV */

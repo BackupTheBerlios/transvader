@@ -59,7 +59,7 @@ Game::Game()
 	
 	clear_to_color ( screen, makecol16(0, 0, 0) );
 
-	this->setSpeed(1);
+	this->setSpeed(60);
 	
 	std::cout << "Game::Game(): finished.\n" << std::endl ;
 
@@ -93,7 +93,7 @@ void Game::run()
 {
 	int c = 0;
 
-	Player *player = new Player();
+	this->player = new Player();
 
 	while ( ( c >> 8 ) != KEY_ESC )
 	{
@@ -114,11 +114,13 @@ void Game::run()
 /*
  * update the double buffer using current object information
  * and blit it to the screen bitmap
- * TODO: implement simple "dirty" flag for whole screen to avoid
- * absolutely unnecessary blitting operations
+ * TODO: implement simple "dirty" flag for whole screen and player sprite
+ * to avoid absolutely unnecessary and easy-to-avoid blitting operations
  */
 void Game::updateScreen()
 {
+	/*this->dblbuffer = screen;*/ //comment out for drawing directly to the screen
+
 	/* clear double buffer to color 0 */
 	clear_bitmap ( this->dblbuffer );
 
@@ -126,6 +128,9 @@ void Game::updateScreen()
 	textprintf( this->dblbuffer, font, 0, 0,
 		makecol16(0, 150, 0),
 		"Cycles left: %d", this->speedcounter);
+	
+	/* draw player sprite */
+	this->player->draw ( this->dblbuffer );
 		
 	/* copy double buffer to screen */
 	acquire_screen();

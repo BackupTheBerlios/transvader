@@ -10,7 +10,7 @@ SRC=main.cxx sprite.cxx player.o exception.cxx game.cxx
 
 ALLEG_CXXFLAGS=`allegro-config --cflags`
 # linker flags need to be fixed because allegro-config doesn't generate output
-# suitable for explicit (i.e. direct ld-call-wise) linking
+# suitable for separate (i.e. direct ld-call-wise) linking
 ALLEG_LDFLAGS=`allegro-config --libs` #|sed -e 's!-Wl,!!'` \
 		#-e _mangled_main_address 
 
