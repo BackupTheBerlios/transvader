@@ -24,7 +24,7 @@ namespace TV {
 	
 			~Viewport();
 	
-		Point translateCoords( const Point& p );
+			Point translateCoords( const Point& p );
 	};
 
 } // end of namespace TV

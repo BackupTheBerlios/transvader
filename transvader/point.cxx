@@ -39,9 +39,9 @@ Point& Point::operator =  ( const Point& p )
 	return *this;
 }
 
-Point& Point::operator +  ( const Point& p ) const
+Point Point::operator +  ( const Point& p ) const
 {
-	return *(new Point( this->x + p.x, this->y + p.y ));
+	return Point( this->x + p.x, this->y + p.y );
 }
 
 Point& Point::operator += ( Point& p )
@@ -52,9 +52,9 @@ Point& Point::operator += ( Point& p )
 	return *this;
 }
 
-Point& Point::operator -  ( const Point& p ) const
+Point Point::operator -  ( const Point& p ) const
 {
-	return *(new Point( this->x - p.x, this->y - p.y ));
+	return Point( this->x - p.x, this->y - p.y );
 }
 
 Point& Point::operator -= ( Point& p )
