@@ -18,7 +18,7 @@ class Player : public Sprite
 	private:
 	
 	public:
-		Player ( std::string location = "data/player/level1.tga" );
+		Player ( std::string location = "data/player/level3.tga" );
 		virtual ~Player();
 	
 	virtual void draw ( BITMAP* bitmap ) const;

@@ -34,7 +34,7 @@ Game::Game()
 	}
 	
 	/* init graphics mode */
-	if ( set_gfx_mode ( GFX_AUTODETECT_WINDOWED, 800, 600, 0, 0 ) < 0 )
+	if ( set_gfx_mode ( GFX_AUTODETECT, 800, 600, 0, 0 ) < 0 )
 	{
 		throw Exception ( std::string("Could not set graphics mode (")
 			+ allegro_error + std::string(")"), ERR_FATAL );
@@ -54,10 +54,9 @@ Game::Game()
 	install_sound ( DIGI_AUTODETECT, MIDI_AUTODETECT, NULL );
 	
 	set_color_depth(16);
+	//set_color_conversion ( COLORCONV_MOST | COLORCONV_DITHER | COLORCONV_KEEP_TRANS );
 	
-	dblbuffer = create_bitmap ( 800, 600 );
-	
-	clear_to_color ( screen, makecol16(0, 0, 0) );
+	clear_to_color ( screen, makecol(0, 0, 0) );
 
 	this->setSpeed(60);
 	
@@ -119,24 +118,22 @@ void Game::run()
  */
 void Game::updateScreen()
 {
-	/*this->dblbuffer = screen;*/ //comment out for drawing directly to the screen
-
-	/* clear double buffer to color 0 */
-	clear_bitmap ( this->dblbuffer );
-
+	//vsync();
+		
+	acquire_bitmap ( screen );
+	
+	//clear_bitmap ( screen );
+	
 	/* write debugging information to top of screen */
-	textprintf( this->dblbuffer, font, 0, 0,
-		makecol16(0, 150, 0),
+	textprintf ( screen, font, 0, 0,
+		makecol(0, 250, 0),
 		"Cycles left: %d", this->speedcounter);
 	
 	/* draw player sprite */
-	this->player->draw ( this->dblbuffer );
-		
-	/* copy double buffer to screen */
-	acquire_screen();
-	blit ( this->dblbuffer, screen, 0, 0, 0, 0, 800, 600 );
-	release_screen();
-
+	this->player->draw ( screen );
+	
+	release_bitmap ( screen );
+	
 	return;
 }
 

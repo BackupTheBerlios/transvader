@@ -31,7 +31,9 @@ Sprite::Sprite ( std::string location )
 	this->size_y = this->default_image->h;
 	
 	std::cout << "succeeded, dimensions " << this->size_x
-		<< "x" << this->size_y << std::endl ;
+		<< "x" << this->size_y << "x"
+		<< bitmap_color_depth ( this->default_image )
+		<< std::endl ;
 	
 	return;
 }

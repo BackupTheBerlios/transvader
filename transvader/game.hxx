@@ -18,8 +18,6 @@ class Game
 		volatile unsigned short speedcounter;
 		static void incSpeedCounter ( void *inst );
 
-		BITMAP* dblbuffer;
-
 		Player *player;
 		
 		unsigned short speed;
