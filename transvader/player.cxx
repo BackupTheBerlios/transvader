@@ -29,7 +29,7 @@ Player::~Player()
 
 void Player::draw ( BITMAP* bitmap ) const
 {
-	draw_sprite ( bitmap, this->default_image, 400, 300 );
+	rotate_sprite ( bitmap, this->default_image, 400, 300, 0 );
 
 	return;
 }

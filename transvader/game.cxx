@@ -56,7 +56,7 @@ Game::Game()
 	set_color_depth(16);
 	//set_color_conversion ( COLORCONV_MOST | COLORCONV_DITHER | COLORCONV_KEEP_TRANS );
 	
-	clear_to_color ( screen, makecol(0, 0, 0) );
+	clear_to_color ( screen, makecol16(0, 0, 0) );
 
 	this->setSpeed(60);
 	
@@ -120,19 +120,19 @@ void Game::updateScreen()
 {
 	//vsync();
 		
-	acquire_bitmap ( screen );
+	//acquire_bitmap ( screen );
 	
-	clear_bitmap ( screen );
+	//clear_bitmap ( screen );
 	
 	/* write debugging information to top of screen */
 	textprintf ( screen, font, 0, 0,
-		makecol(0, 250, 0),
+		makecol16(0, 300, 0),
 		"Cycles left: %d", this->speedcounter);
 	
 	/* draw player sprite */
 	this->player->draw ( screen );
 	
-	release_bitmap ( screen );
+	//release_bitmap ( screen );
 	
 	return;
 }
