@@ -67,7 +67,7 @@ Game::Game()
 	install_sound ( DIGI_AUTODETECT, MIDI_AUTODETECT, NULL );
 	clear_to_color ( screen, makecol(0, 0, 0) );
 
-	this->setSpeed(60);
+	this->setSpeed(20);
 	
 	this->display = new Display();
 	
