@@ -15,6 +15,7 @@
 #include "exception.hxx"
 #include "player.hxx"
 #include "doublebuffer.hxx"
+#include "pageflipper.hxx"
 #include "game.hxx"
 
 
@@ -27,7 +28,7 @@ const unsigned short res_y = 600;
 const unsigned short depth =   32;
 const unsigned short gameSpeed =   50;
 
-/*
+/* 
  * initialize drivers and some things more
 */
 Game::Game()
@@ -45,8 +46,8 @@ Game::Game()
 	set_color_depth(depth);
 	set_color_conversion ( COLORCONV_TOTAL | COLORCONV_DITHER | COLORCONV_KEEP_TRANS );
 
-	/*int ret = set_gfx_mode (GFX_AUTODETECT_WINDOWED,
-	                res_x, res_y, res_x*2, res_y);  */
+
+	/* FIXME: only for PF! */
         #ifdef ALLEGRO_VRAM_SINGLE_SURFACE
 		int ret = set_gfx_mode ( GFX_AUTODETECT_WINDOWED,
 			res_x, res_y, res_x*2, res_y );
@@ -88,8 +89,12 @@ Game::Game()
 
 	this->setSpeed(gameSpeed);
 
-	this->display = new Doublebuffer ( SCREEN_W, SCREEN_H );
-
+	#ifdef ALLEGRO_WINDOWS
+		this->display = new Doublebuffer ( SCREEN_W, SCREEN_H );
+	#else
+		this->display = new Pageflipper ( SCREEN_W, SCREEN_H );
+	#endif
+	
 	return;
 
 }

@@ -39,12 +39,14 @@ Sprite::Sprite ( std::string location )
 		<< std::endl ;
 	
 	/* pageflipper only, fixme */
+	#ifdef ALLEGRO_WINDOWS
 	BITMAP *tmp = create_video_bitmap ( this->width, this->height );
 	if ( tmp != NULL )
 	{
 		destroy_bitmap(this->default_image);
 		this->default_image = tmp;
 	}
+	#endif
 	
 	return;
 }
