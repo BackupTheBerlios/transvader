@@ -34,6 +34,9 @@ Game::Game()
 	}
 	
 	/* init graphics mode */
+	set_color_depth(16);
+	set_color_conversion ( COLORCONV_TOTAL | COLORCONV_DITHER | COLORCONV_KEEP_TRANS );
+	
 	if ( set_gfx_mode ( GFX_AUTODETECT_WINDOWED, 800, 600, 0, 0 ) < 0 )
 	{
 		throw Exception ( std::string("Could not set graphics mode (")
@@ -52,9 +55,6 @@ Game::Game()
 	install_keyboard();
 	install_timer();
 	install_sound ( DIGI_AUTODETECT, MIDI_AUTODETECT, NULL );
-	
-	set_color_depth(16);
-	//set_color_conversion ( COLORCONV_MOST | COLORCONV_DITHER | COLORCONV_KEEP_TRANS );
 	
 	clear_to_color ( screen, makecol16(0, 0, 0) );
 
@@ -111,28 +111,23 @@ void Game::run()
 }
 
 /*
- * update the double buffer using current object information
- * and blit it to the screen bitmap
- * TODO: implement simple "dirty" flag for whole screen and player sprite
- * to avoid absolutely unnecessary and easy-to-avoid blitting operations
+ * draw. target algorithm: "dirty rectangles"
  */
 void Game::updateScreen()
 {
-	//vsync();
-		
-	//acquire_bitmap ( screen );
-	
-	//clear_bitmap ( screen );
+	vsync();
+	acquire_bitmap ( screen );
+	clear_bitmap ( screen );
 	
 	/* write debugging information to top of screen */
 	textprintf ( screen, font, 0, 0,
-		makecol16(0, 300, 0),
+		makecol16(0, 200, 0),
 		"Cycles left: %d", this->speedcounter);
 	
 	/* draw player sprite */
 	this->player->draw ( screen );
 	
-	//release_bitmap ( screen );
+	release_bitmap ( screen );
 	
 	return;
 }

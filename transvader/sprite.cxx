@@ -21,7 +21,7 @@ Sprite::Sprite ( std::string location )
 	std::cout << "Attempt to create new sprite from \""
 		<< location << + "\"... " ;
 	
-	if ( ( this->default_image = load_tga ( location.c_str(), NULL ) )
+	if ( ( this->default_image = load_bitmap ( location.c_str(), NULL ) )
 		== NULL )
 	{
 		throw Exception ( "Could not open sprite file " + location, ERR_FATAL );
