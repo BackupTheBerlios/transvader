@@ -9,7 +9,6 @@
 
 #include "display.hxx"
 #include "player.hxx"
-#include "pageflipper.hxx"
 
 namespace TV
 {

@@ -14,7 +14,7 @@
 
 #include "exception.hxx"
 #include "player.hxx"
-
+#include "pageflipper.hxx"
 #include "game.hxx"
 
 
@@ -39,7 +39,15 @@ Game::Game()
 	set_color_depth(32);
 	set_color_conversion ( COLORCONV_TOTAL | COLORCONV_DITHER | COLORCONV_KEEP_TRANS );
 	
-	if ( set_gfx_mode ( GFX_AUTODETECT_WINDOWED, 800, 600, 1600, 600 ) < 0 )
+	//#ifdef ALLEGRO_VRAM_IS_SINGLE_SURFACE
+		int ret = set_gfx_mode ( GFX_AUTODETECT_WINDOWED,
+			800, 600, 800*2, 600 );
+	/*#else
+		int ret = set_gfx_mode ( GFX_AUTODETECT_WINDOWED,
+			800, 600, 0, 0 );
+	#endif*/
+	
+	if ( ret < 0 )
 	{
 		throw Exception ( std::string("Could not set graphics mode (")
 			+ allegro_error + std::string(")"), ERR_FATAL );
@@ -144,11 +152,10 @@ void Game::run()
 			speedcounter--;
 		}
 
-		vsync();
+/*		vsync();
 
 		acquire_bitmap(screen);
 		{
-
 			BITMAP *black = create_bitmap ( 800, 20 );
 
 			clear_to_color ( black, makecol(0,0,0) );
@@ -166,7 +173,7 @@ void Game::run()
 
 
 			/* write current and average fps on top of screen */
-	        	textprintf(screen, font, 0, 0, makecol(0,200,0),
+	        	/*textprintf(screen, font, 0, 0, makecol(0,200,0),
 				"FPS: %d  Average FPS: %d",
 				this->last_fps, this->avg_fps);
 
@@ -177,7 +184,11 @@ void Game::run()
 		}
 		release_bitmap(screen);
 		
-		this->fps++;
+		this->fps++;*/
+		
+		this->player->draw ( this->display->getBitmap() );
+		
+		this->display->draw();
 	}
 
 	delete ( this->player );

@@ -28,6 +28,7 @@ Pageflipper::Pageflipper ( int width, int height )
         clear(framebuf);
 
         activebuf = framebuf;
+	inactivebuf = backbuf;
 
 }
 
@@ -41,20 +42,28 @@ Pageflipper::~Pageflipper()
 
 void Pageflipper::draw()
 {
-     show_video_bitmap(activebuf);
+     show_video_bitmap ( activebuf );
 
      if (activebuf == backbuf)
+     {
         activebuf = framebuf;
+	inactivebuf = backbuf;
+     }
      else
+     {
         activebuf = backbuf;
+	inactivebuf = framebuf;
+     }
+
+     clear ( inactivebuf );
 
      return;
 }
 
 
-BITMAP *Pageflipper::getBMP()
+BITMAP *Pageflipper::getBitmap()
 {
-	return ( this->activebuf );
+	return ( this->inactivebuf );
 }
 
 } /*namespace TV */

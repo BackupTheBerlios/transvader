@@ -13,7 +13,7 @@ class Display
         Display();
 	virtual ~Display();
 
-	virtual BITMAP *getBMP() = 0;
+	virtual BITMAP *getBitmap() = 0;
 	virtual void draw() = 0;
 
 };

@@ -49,7 +49,7 @@ void Player::draw ( BITMAP* bitmap )
 
 void Player::update()
 {
-	static fixed i = 10;
+/*	static fixed i = 10;
 
 	//std::cout << "   Last: " << *lastBBox << std::endl;
 	//std::cout << "Current: " << *currentBBox << std::endl;
@@ -60,6 +60,8 @@ void Player::update()
 	this->x += (i+=ftofix(0.1));
 
 	currentBBox = new Rectangle ( fixtoi(this->x), fixtoi(this->y), this->width, this->height );
+	*/
+	this->x += ftofix(1.0);
 	
 	return;
 }

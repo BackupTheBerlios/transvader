@@ -15,12 +15,13 @@ class Pageflipper : public Display
                BITMAP *backbuf;
                BITMAP *framebuf;
                BITMAP *activebuf;
+	       BITMAP *inactivebuf;
 
         public:
                Pageflipper ( int width, int height );
                ~Pageflipper();
 
-               virtual BITMAP *getBMP();
+               virtual BITMAP *getBitmap();
                void draw();
 
 
