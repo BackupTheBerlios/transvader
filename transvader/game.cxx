@@ -34,7 +34,7 @@ Game::Game()
 	}
 	
 	/* init graphics mode */
-	if ( set_gfx_mode ( GFX_AUTODETECT, 800, 600, 0, 0 ) < 0 )
+	if ( set_gfx_mode ( GFX_AUTODETECT_WINDOWED, 800, 600, 0, 0 ) < 0 )
 	{
 		throw Exception ( std::string("Could not set graphics mode (")
 			+ allegro_error + std::string(")"), ERR_FATAL );
@@ -122,7 +122,7 @@ void Game::updateScreen()
 		
 	acquire_bitmap ( screen );
 	
-	//clear_bitmap ( screen );
+	clear_bitmap ( screen );
 	
 	/* write debugging information to top of screen */
 	textprintf ( screen, font, 0, 0,
