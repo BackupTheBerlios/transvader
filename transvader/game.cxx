@@ -25,6 +25,7 @@ namespace TV
  * initialize drivers and some things more
 */
 Game::Game()
+: speedcounter(0)
 {
 	/* initialize Allegro */
 	if ( install_allegro ( SYSTEM_AUTODETECT, &errno, atexit ) )
@@ -67,7 +68,7 @@ Game::Game()
 	install_sound ( DIGI_AUTODETECT, MIDI_AUTODETECT, NULL );
 	clear_to_color ( screen, makecol(0, 0, 0) );
 
-	this->setSpeed(30);
+	this->setSpeed(15);
 	
 	this->display = new Display();
 	
@@ -126,7 +127,6 @@ void Game::run()
 
 	this->player = new Player();
 	
-	this->display->addSprite ( this->player );
 
 	while ( ( c >> 8 ) != KEY_ESC )
 	{
@@ -140,38 +140,45 @@ void Game::run()
 
 		while ( this->speedcounter > 0 )
 		{
-			this->updateData();
+
+                        textprintf ( screen, font, 0, 40, 
+                makecol(0, 235, 0), "x %d", this->speedcounter);
+                	this->display->addSprite ( this->player );
+                        this->updateData();
 			speedcounter--;
 		}
 
 
 		vsync();
-		
+
 		acquire_bitmap(screen);
 		{
+
 			BITMAP *black = create_bitmap ( 800, 20 );
-		
+
 			clear_to_color ( black, makecol(0,0,0) );
 		
 			blit ( black, screen, 0, 0, 0, 0, 800, 20 );
 		
+
 			textprintf ( screen, font, 0, 10,
 				makecol(0, 235, 0),
 				"Cycles left: %d | Angle: %d | Player: (%d,%d)",
 				this->speedcounter, fixtoi(this->player->angle),
 				fixtoi(this->player->x), fixtoi(this->player->y)
+
 				);
 
-	
+
 			/* write current and average fps on top of screen */
 	        	textprintf(screen, font, 0, 0, makecol(0,200,0),
 				"FPS: %d  Average FPS: %d",
 				this->last_fps, this->avg_fps);
-	
-			destroy_bitmap ( black );		
+
+			destroy_bitmap ( black );
 		}
 		{
-			this->display->draw();
+                        this->display->draw();
 		}
 		release_bitmap(screen);
 		
