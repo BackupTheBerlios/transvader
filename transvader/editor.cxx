@@ -1,5 +1,6 @@
 #include "editor.hxx"
-#include "cgui.h"
+#include <cgui.h>
+#include "palette.hxx"
 
 namespace TV
 {
@@ -31,10 +32,12 @@ void Editor::run()
 	DisplayWin();
 	
 	// Object palette
-	MkDialogue(ADAPTIVE, "Object Palette", W_FLOATING);
-	MkCanvas ( 0, 0, 100, 200, mouse_cb, static_cast<void*>(this) );
+	Palette pal;
+	
+	//MkDialogue(ADAPTIVE, "Object Palette", W_FLOATING);
+	//MkCanvas ( 0, 0, 100, 200, mouse_cb, static_cast<void*>(this) );
 	//AddTextBox(RIGHT, "A simple window showing some buttons. Press the button to the left and you will get a new identical window.", 200, 0, 0);
-	DisplayWin();
+	//DisplayWin();
 	
 	// Object properties
 	MkDialogue(ADAPTIVE, "Property Editor", W_FLOATING);
