@@ -20,11 +20,11 @@ namespace TV {
 	class Viewport : public Rectangle {
 
 		public:
-			Viewport(Point& p, int w, int h);
+			Viewport(Point p, int w, int h);
 	
 			~Viewport();
 	
-			Point translateCoords( const Point& p );
+			Point translateCoords( const Point p );
 	};
 
 } // end of namespace TV

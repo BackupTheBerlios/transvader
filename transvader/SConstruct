@@ -1,0 +1,21 @@
+CCFLAGS = ' `allegro-config --cflags` ' 
+LINKFLAGS = ' `allegro-config --libs` ' 
+
+sources = Split("""main.cxx
+	application.cxx
+	backdrop.cxx
+	config.cxx
+	display.cxx
+	doublebuffer.cxx
+	pageflipper.cxx
+	exception.cxx
+	foe.cxx
+	game.cxx
+	map.cxx
+	player.cxx
+	point.cxx
+	rectangle.cxx
+	sprite.cxx""")
+
+env = Environment ( CCFLAGS=CCFLAGS, LINKFLAGS=LINKFLAGS )
+env.Program ( 'transvader', sources ) 

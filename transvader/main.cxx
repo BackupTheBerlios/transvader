@@ -12,12 +12,12 @@
 
 #include "exception.hxx"
 #include "application.hxx"
-#include "editor.hxx"
+//#include "editor.hxx"
 #include "game.hxx"
 
 using TV::Application;
 using TV::Game;
-using TV::Editor;
+//using TV::Editor;
 using TV::Exception;
 
 int main ( int argc, char** argv )
@@ -28,11 +28,11 @@ int main ( int argc, char** argv )
 	try
 	{
 	
-		if ( appname == "transvader-editor" )
+/*	if ( appname == "transvader-editor" )
 		{
 			app = new Editor();
 		}
-		else
+		else*/
 		{	
 			app = new Game();
 		}

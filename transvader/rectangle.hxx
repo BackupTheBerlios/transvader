@@ -23,10 +23,7 @@ namespace TV
 
 class Rectangle
 {
-	
-
 	public:
-		
 		Rectangle ();
 		Rectangle ( Point new_p, int new_w, int new_h );
 		Rectangle ( Rectangle& );
