@@ -9,9 +9,9 @@ BIN=transvader.exe
 OBJ=main.o sprite.o player.o exception.o game.o
 SRC=$(OBJ:%.o=%.cxx)
 
-ALLEG_CXXFLAGS=-lalleg
+ALLEG_CXXFLAGS=-lalleg #-Wl,--subsystem,windows #uncomment to prevent console popup
 CXX=g++
-CXXFLAGS=-ggdb -Wall -Wl,--subsystem,windows -O2 
+CXXFLAGS=-ggdb -Wall -O2 
 DEPENDFILE = .depend
 
 all: dep transvader
