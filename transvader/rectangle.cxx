@@ -116,6 +116,8 @@ Rectangle& Rectangle::operator + ( Rectangle& rect)
 
 int Rectangle::commonPixels ( Rectangle& rect )
 {
+    /* unnecessary because of similar function commonRectangle
+
     int common_w = 0;
     int common_h = 0;
 
@@ -133,7 +135,12 @@ int Rectangle::commonPixels ( Rectangle& rect )
     else
         common_w = this->w;
 
-    return(common_h * common_w);
+    return(common_h * common_w); 
+    
+    */
+
+    rect = commonRectangle ( rect);
+    return(rect.h * rect.w);
 
 }
 
