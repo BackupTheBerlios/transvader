@@ -7,6 +7,9 @@
 #ifndef EXCEPTION_HXX
 #define EXCEPTION_HXX
 
+#include <string>
+
+
 namespace TV
 {
 
