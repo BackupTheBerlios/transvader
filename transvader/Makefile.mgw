@@ -11,7 +11,7 @@ SRC=$(OBJ:%.o=%.cxx)
 
 ALLEG_CXXFLAGS=-lalleg
 CXX=g++
-CXXFLAGS=-ggdb -Wall 
+CXXFLAGS=-ggdb -Wall -Wl,--subsystem,windows -O2 
 DEPENDFILE = .depend
 
 all: dep transvader

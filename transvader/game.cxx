@@ -117,16 +117,16 @@ void Game::run() const
  * TODO: implement simple "dirty" flag for whole screen to avoid
  * absolutely unnecessary blitting operations
  */
-void Game::updateScreen()
+void Game::updateScreen() const
 {
 	/* clear double buffer to color 0 */
 	clear_bitmap ( this->dblbuffer );
 
 	/* write debugging information to top of screen */
-	textprintf_ex ( this->dblbuffer, font, 0, 0,
-		makecol16(0, 150, 0), makecol16(0, 0, 0),
-		"Cycles left: %d", this->speedcounter );
-	
+	textprintf( this->dblbuffer, font, 0, 0,
+		makecol16(0, 150, 0),
+		"Cycles left: %d", this->speedcounter);
+		
 	/* copy double buffer to screen */
 	acquire_screen();
 	blit ( this->dblbuffer, screen, 0, 0, 0, 0, 800, 600 );
