@@ -1,6 +1,10 @@
 
 #include <list>
 
+#include "display.hxx"
+
+namespace TV
+{
 
 Display::Display()
 {
@@ -14,15 +18,19 @@ Display::~Display()
 }
 
 
-void Display::addSprite ( const Sprite& sprite )
+void Display::addSprite ( Sprite *sprite )
 {
 	this->sprites.push_back ( sprite );
+	this->old_sprites.push_back ( sprite->getBoundingBox() );
 	
 	return;
 }
 
-
-void Display::prepare()
+/**
+ * optimize our list of dirty rectangles:
+ * 	- unite overlapping rectangles (maybe only if not too many new objects have to be added) 
+ */
+void Display::optimize()
 {
 	return;
 }
@@ -34,9 +42,9 @@ void Display::draw()
 }
 
 
-void Display::invalidateRect()
+void Display::invalidateRect ( const Rectangle& rect )
 {
 	return;
 }
 
-
+} // namespace TV

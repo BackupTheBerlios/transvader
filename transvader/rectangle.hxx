@@ -10,10 +10,11 @@ namespace TV
 
 class Rectangle
 {
-	protected:
-		unsigned short x, y, w, h;
+	
 
 	public:
+		unsigned short x, y, w, h;
+		
 		Rectangle();
 		Rectangle (unsigned short x,unsigned short y,unsigned short w,unsigned short h );
 		Rectangle ( Rectangle& rect );

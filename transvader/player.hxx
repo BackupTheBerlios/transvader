@@ -23,6 +23,10 @@ class Player : public Sprite
 	
 		virtual void update();
 		virtual void draw ( BITMAP* bitmap );
+		
+		Rectangle* getBoundingBox();
+		
+		
 };
 
 } // namespace TV

@@ -11,6 +11,8 @@
 
 #include <allegro.h>
 
+#include "rectangle.hxx"
+
 
 namespace TV
 {
@@ -20,17 +22,22 @@ class Sprite /* base class */
 	protected:
 		BITMAP *default_image;
 	
+		bool dirty;
+	
 		fixed x, y;
 		unsigned short width, height;
-	
+		
 	public:
 		fixed angle;	
 	
 		Sprite ( std::string filename );
 		virtual ~Sprite();
 	
+		virtual bool isDirty();
 		virtual void update () = 0;
 		virtual void draw ( BITMAP* bitmap );
+		
+		virtual Rectangle* getBoundingBox() = 0;
 };
 
 } /* namespace TV */

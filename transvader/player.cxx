@@ -59,4 +59,10 @@ void Player::update()
 	return;
 }
 
+
+Rectangle* Player::getBoundingBox()
+{
+	return ( new Rectangle ( this->x, this->y, this->width, this->height ) );
+}
+
 } /* namespace TV */

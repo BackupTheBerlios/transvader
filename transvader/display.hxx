@@ -2,6 +2,8 @@
 #define DISPLAY_HXX
 
 
+#include <list>
+
 #include "rectangle.hxx"
 #include "sprite.hxx"
 
@@ -11,19 +13,21 @@ namespace TV
 class Display
 {
 	protected:
-		BITMAP *dblbuffer;
-		list <Sprite> sprites;
-		list <Sprite> old_sprites;
+		//BITMAP *dblbuffer;
+		std::list <Sprite*> sprites;
+		std::list <Rectangle*> old_sprites;
 
 		void invalidateRect( const Rectangle& r );
+		void findRectangles();
 
 	public:
 		Display();
 		~Display();
 	
-		void addSprite ( const Sprite& sprite );
+		void addSprite ( Sprite* sprite );
 		
 		void prepare();
+		void optimize();
 		void draw();
 };
 

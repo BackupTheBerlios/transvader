@@ -9,6 +9,7 @@
 
 #include "exception.hxx"
 
+#include "rectangle.hxx"
 #include "sprite.hxx"
 
 
@@ -43,6 +44,12 @@ Sprite::Sprite ( std::string location )
 
 Sprite::~Sprite()
 {
+	//call this->onDestroy(this);
+}
+
+bool Sprite::isDirty()
+{
+	return ( this->dirty );
 }
 
 /* basic drawing */

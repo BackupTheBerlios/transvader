@@ -7,6 +7,7 @@
 #ifndef TV_HXX
 #define TV_HXX
 
+#include "display.hxx"
 #include "player.hxx"
 
 namespace TV
@@ -33,6 +34,8 @@ class Game
 
 		void updateData();
 		void updateScreen();
+		
+		Display* display;
 
 	public:
 		Game();

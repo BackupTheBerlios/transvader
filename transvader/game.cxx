@@ -69,6 +69,8 @@ Game::Game()
 
 	this->setSpeed(80);
 	
+	this->display = new Display();
+	
 	return;
 
 }
@@ -121,6 +123,8 @@ void Game::run()
 	int c = 0;
 
 	this->player = new Player();
+	
+	this->display->addSprite ( this->player );
 
 	while ( ( c >> 8 ) != KEY_ESC )
 	{
@@ -138,7 +142,7 @@ void Game::run()
 			speedcounter--;
 		}
 
-		this->updateScreen();
+		this->display->draw();
 		this->fps++;
 	}
 
