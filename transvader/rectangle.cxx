@@ -51,7 +51,7 @@ bool Rectangle::operator == ( const Rectangle& rect )
 		&& this->w == rect.w && this->h == rect.h );
 }
 
-/* assigns the values of one rectangle to another */
+/* asigns the values of one rectangle to another */
 
 Rectangle& Rectangle::operator = ( Rectangle& rect )
 {
@@ -89,7 +89,7 @@ return(false);
 
 /* combines two rectangles to one*/
 
-Rectangle& Rectangle::unite(Rectangle& rect)
+Rectangle& Rectangle::operator + ( Rectangle& rect)
 {
 
         if(this->x < rect.x)
@@ -135,6 +135,53 @@ int Rectangle::commonPixels ( Rectangle& rect )
 
     return(common_h * common_w);
 
+}
+
+/* returns the Rectangle two traversing Rectangles share */
+
+Rectangle& Rectangle::commonRectangle ( Rectangle& rect)
+{
+    int common_x = 0;
+    int common_y = 0;
+    int common_h = 0;
+    int common_w = 0;
+
+    if( (this->y + this->h) < (rect.y + rect.h) )
+    {
+        common_h = rect.h  - ( (rect.y + rect.h) - (this->y + this->h) );
+        common_y = rect.y;
+    }
+    else if ( (this->y + this->h) > (rect.y + rect.h) )
+    {
+        common_h = this->h - ( (this->y + this->h) - (rect.y + rect.h) );
+        common_y = this->y;
+    }
+    else
+    {
+        common_h = this->h;
+        common_y = this->y;
+    }
+
+    if( (this->x + this->w) < (rect.x + rect.w) )
+    {
+        common_w = rect.w  - ( (rect.x + rect.w) - (this->x + this->w) );
+        common_x = rect.x;
+    }
+    else if ( (this->x + this->w) > (rect.x + rect.w) )
+    {
+        common_w = this->w - ( (this->x + this->w) - (rect.x + rect.w) );
+        common_x = this->x;
+    }
+    else
+    {
+        common_w = this->w;
+        common_x = this->x;
+    }
+    this->x = common_x;
+    this->y = common_y;
+    this->h = common_w;
+    this->w = common_h;
+    return( *this );
 }
 
 /* get coordinates of the rectangle */

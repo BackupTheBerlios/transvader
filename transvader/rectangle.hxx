@@ -27,13 +27,14 @@ class Rectangle
 
                 bool operator == ( const Rectangle& );
                 Rectangle& operator = ( Rectangle& );
+                Rectangle& operator + ( Rectangle& );
 		friend std::ostream& operator << ( std::ostream& , const Rectangle& );
 		
 		bool doesTraverse ( Rectangle& );
 		bool doesTraverse ( Point& );
 		
 		int commonPixels ( Rectangle& );
-		Rectangle& Rectangle::unite ( Rectangle& );
+		Rectangle& commonRectangle ( Rectangle& );
 
 		unsigned short getX();
 		unsigned short getY();
