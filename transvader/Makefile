@@ -24,9 +24,3 @@ clean:
 
 transvader: $(OBJ)
 	$(LD) $(LDFLAGS) $(OBJ) -o $(BIN)
-	
-depend:
-	rm -f .depend
-	makedepend -f- -- $(CXXFLAGS) -- $(SRC) > .depend
-
-include .depend
