@@ -14,7 +14,7 @@
 
 #include "exception.hxx"
 #include "player.hxx"
-#include "pageflipper.hxx"
+#include "doublebuffer.hxx"
 #include "game.hxx"
 
 
@@ -44,15 +44,18 @@ Game::Game()
 	/* init graphics mode */
 	set_color_depth(depth);
 	set_color_conversion ( COLORCONV_TOTAL | COLORCONV_DITHER | COLORCONV_KEEP_TRANS );
-	
-	#ifdef ALLEGRO_VRAM_SINGLE_SURFACE
+
+	/*int ret = set_gfx_mode (GFX_AUTODETECT_WINDOWED,
+	                res_x, res_y, res_x*2, res_y);  */
+        #ifdef ALLEGRO_VRAM_SINGLE_SURFACE
 		int ret = set_gfx_mode ( GFX_AUTODETECT_WINDOWED,
 			res_x, res_y, res_x*2, res_y );
 	#else
 		int ret = set_gfx_mode ( GFX_AUTODETECT_WINDOWED,
 			res_x, res_y, 0, 0 );
 	#endif
-	
+
+
 	if ( ret < 0 )
 	{
 		throw Exception ( std::string("Could not set graphics mode (")
@@ -66,7 +69,7 @@ Game::Game()
 	{
 		allegro_message ( "Triple buffering enabled\n" );
 	}
-	
+
 	/* init keyboard, timer and sound */
 	install_keyboard();
 	install_timer();
@@ -85,8 +88,8 @@ Game::Game()
 
 	this->setSpeed(gameSpeed);
 
-	this->display = new Pageflipper ( SCREEN_W, SCREEN_H );
-	
+	this->display = new Doublebuffer ( SCREEN_W, SCREEN_H );
+
 	return;
 
 }
@@ -170,9 +173,10 @@ void Game::run()
 			this->last_fps, this->avg_fps);
 
 		this->player->draw ( this->display->getBitmap() );
-		
-		this->display->draw();
-		
+
+                this->display->draw();
+
+
 		this->fps++;
 	}
 
