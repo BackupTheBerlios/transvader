@@ -20,13 +20,13 @@ class Exception
 			const severity_t severity = ERR_FATAL );
 		~Exception();
 
-		void handle();
-		void toConsole();
+		void handle() const;
+		void toConsole() const;
 		
 		/* accessor functions */
-		char* getErrorString();
-		severity_t getSeverity();
-		char* getSeverityString();
+		char* getErrorString() const;
+		severity_t getSeverity() const;
+		char* getSeverityString() const;
 };
 
 

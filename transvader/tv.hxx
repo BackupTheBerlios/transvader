@@ -7,7 +7,7 @@ class TV
 		TV();
 		~TV();
 	
-		void run();
+		void run() const;
 };
 
 #endif
