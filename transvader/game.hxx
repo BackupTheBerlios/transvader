@@ -13,11 +13,13 @@ namespace TV
 class Game
 {
 	private:
-		unsigned short speed;
-	
 		volatile unsigned short speedcounter;
-
 		static void incSpeedCounter ( void *inst );
+
+		BITMAP* dblbuffer;
+		
+		unsigned short speed;
+		
 		void updateScreen() const;
 
 	public:

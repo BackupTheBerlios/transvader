@@ -57,14 +57,14 @@ Game::Game()
 	
 	set_color_depth(16);
 	
+	dblbuffer = create_bitmap ( 800, 600 );
+	
 	clear_to_color ( screen, makecol16(0, 0, 0) );
 
-	this->setSpeed(60);
+	this->setSpeed(1);
 	
 	allegro_message ( "Game::Game(): finished.\n" );
 
-	readkey();
-	
 	return;
 }
 
@@ -77,34 +77,74 @@ Game::~Game()
 
 /*
  * increment the game speed counter.
- * called at regular intervals (changeable via setSpeed)
+ * called at regular intervals ( changeable via setSpeed() )
  * via interrupt
  */
 void Game::incSpeedCounter ( void *inst )
 {
+	(static_cast<Game*>(inst))->speedcounter++;
+
 	return;
 }
+END_OF_FUNCTION(incSpeedCounter)
 
 /*
  * main game loop
  */
 void Game::run() const
 {
-	
+	int c = 0;
+
+	while ( ( c >> 8 ) != KEY_ESC )
+	{
+		if ( keyboard_needs_poll() )
+		{
+			poll_keyboard();
+		}
+
+		if ( keypressed() )
+			c = readkey();
+
+		this->updateScreen();
+	}
 
 	return;
 }
 
 /*
- * update the screen (duh!)
+ * update the double buffer using current object information
+ * and blit it to the screen bitmap
+ * TODO: implement simple "dirty" flag for whole screen to avoid
+ * absolutely unnecessary blitting operations
  */
 void Game::updateScreen() const
 {
+	/* clear double buffer to color 0 */
+	clear_bitmap ( this->dblbuffer );
+
+	/* write debugging information to top of screen */
+	textprintf_ex ( this->dblbuffer, font, 0, 0,
+		makecol16(0, 150, 0), makecol16(0, 0, 0),
+		"Cycles left: %d", this->speedcounter );
+	
+	/* copy double buffer to screen */
+	acquire_screen();
+	blit ( this->dblbuffer, screen, 0, 0, 0, 0, 800, 600 );
+	release_screen();
+
 	return;
 }
 
 inline void Game::setSpeed ( unsigned short speed )
 {
+	remove_param_int ( Game::incSpeedCounter, static_cast<void*>(this) );
+
+	LOCK_FUNCTION(Game::incSpeedCounter)
+	LOCK_VARIABLE(this->speedcounter)
+
+	install_param_int_ex( Game::incSpeedCounter, static_cast<void*>(this),
+		BPS_TO_TIMER(speed) ); //FIXME: error checking
+
 	return;
 }
 
