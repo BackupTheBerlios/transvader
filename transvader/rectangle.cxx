@@ -101,23 +101,42 @@ Rectangle& Rectangle::operator + ( Rectangle& rect)
                 rect.x = this->x;
 
 	if(this->y < rect.y)
-                     rect.y = this->y;
+                rect.y = this->y;
 
-           if( (this->y + this->h) < (rect.y + rect.h) )
-                      rect.h = ( (rect.y + rect.h) - this->y);
-           else if ( (this->y + this->h) > (rect.y + rect.h) )
-                      rect.h = ( (this->y + this->h)  + rect.y);
+        if( (this->y + this->h) < (rect.y + rect.h) )
+                rect.h = ( (rect.y + rect.h) - this->y);
+        else if ( (this->y + this->h) > (rect.y + rect.h) )
+                rect.h = ( (this->y + this->h)  + rect.y);
 
-           if( (this->x + this->w) < (rect.x + rect.w) )
-                      rect.w = ( (rect.x + rect.w) - this->x);
-           else if ( (this->x + this->w) > (rect.x + rect.w) )
-                      rect.w = ( (this->x + this->w) + rect.x);
+        if( (this->x + this->w) < (rect.x + rect.w) )
+                rect.w = ( (rect.x + rect.w) - this->x);
+        else if ( (this->x + this->w) > (rect.x + rect.w) )
+                rect.w = ( (this->x + this->w) + rect.x);
 
-           return(rect);
+        return(rect);
 
 }
 
-/* 
+Rectangle& Rectangle::operator += ( int pixel)
+{
+        this->h = this->h + pixel;
+        this->w = this->w + pixel;
+        
+        return( *this );
+}
+
+Rectangle& Rectangle::operator -= ( int pixel)
+{
+        if ( ( (this->h - pixel) > 0) && ( (this->w - pixel) > 0) )
+        {
+           this->h = this->h - pixel;
+           this->w = this->w - pixel;
+        }
+
+        return( *this );
+}
+
+/*
  * calculates the amount of pixels both rectangles share with each other 
  */
 
@@ -203,8 +222,16 @@ unsigned short Rectangle::getH()
 
 
 /* 
- * set coordinates of the rectangle 
+ * sets coordinates of the rectangle
  */
+
+void Rectangle::setCoordinates (unsigned short new_x, unsigned short new_y, unsigned short new_h, unsigned short new_w)
+{
+        this->x = new_x;
+        this->y = new_y;
+        this->h = new_h;
+        this->w = new_w;
+}
 
 void Rectangle::setX ( unsigned short new_x )
 {
