@@ -21,6 +21,12 @@
 namespace TV
 {
 
+/* hackish, subject to change */
+const unsigned short res_x = 640;
+const unsigned short res_y = 480;
+const unsigned short depth =   8;
+const unsigned short gameSpeed =   40;
+
 /*
  * initialize drivers and some things more
 */
@@ -36,12 +42,12 @@ Game::Game()
 	}
 
 	/* init graphics mode */
-	set_color_depth(32);
+	set_color_depth(depth);
 	set_color_conversion ( COLORCONV_TOTAL | COLORCONV_DITHER | COLORCONV_KEEP_TRANS );
 	
 	//#ifdef ALLEGRO_VRAM_IS_SINGLE_SURFACE
 		int ret = set_gfx_mode ( GFX_AUTODETECT_WINDOWED,
-			800, 600, 800*2, 600 );
+			res_x, res_y, res_x*2, res_y );
 	/*#else
 		int ret = set_gfx_mode ( GFX_AUTODETECT_WINDOWED,
 			800, 600, 0, 0 );
@@ -77,9 +83,9 @@ Game::Game()
 	install_sound ( DIGI_AUTODETECT, MIDI_AUTODETECT, NULL );
 	clear_to_color ( screen, makecol(0, 0, 0) );
 
-	this->setSpeed(50);
+	this->setSpeed(gameSpeed);
 
-	this->display = new Pageflipper(800, 600);
+	this->display = new Pageflipper(res_x, res_y);
 	
 	return;
 

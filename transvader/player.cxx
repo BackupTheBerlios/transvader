@@ -20,8 +20,8 @@ Player::Player ( std::string location )
 {
 	this->descString = "Player";
 
-	this->x = itofix(100);
-	this->y = itofix(300);
+	this->x = itofix(50);
+	this->y = itofix(70);
 	this->angle = itofix(0);
 	
 	

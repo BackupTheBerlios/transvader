@@ -42,6 +42,8 @@ Pageflipper::~Pageflipper()
 
 void Pageflipper::draw()
 {
+     rest(10);
+
      show_video_bitmap ( activebuf );
 
      if (activebuf == backbuf)
