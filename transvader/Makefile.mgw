@@ -6,7 +6,7 @@
 # read the file LICENSE at the root of this distribution
 
 BIN=transvader.exe
-OBJ=main.o sprite.o exception.o tv.o
+OBJ=main.o sprite.o exception.o game.o
 SRC=$(OBJ:%.o=%.cxx)
 
 ALLEG_CXXFLAGS=-lalleg

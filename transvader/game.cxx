@@ -10,10 +10,16 @@
 #include <allegro.h>
 
 #include "exception.hxx"
-#include "tv.hxx"
+#include "game.hxx"
 
 
-TV::TV()
+namespace TV
+{
+
+/*
+ * initialize drivers and some things more
+*/
+Game::Game()
 {
 	/* initialize Allegro */
 	if ( install_allegro ( SYSTEM_AUTODETECT, &errno, atexit ) )
@@ -52,24 +58,54 @@ TV::TV()
 	set_color_depth(16);
 	
 	clear_to_color ( screen, makecol16(0, 0, 0) );
+
+	this->setSpeed(60);
 	
-	allegro_message ( "TV::TV(): finished.\n" );
+	allegro_message ( "Game::Game(): finished.\n" );
 
 	readkey();
 	
 	return;
 }
 
-TV::~TV()
+Game::~Game()
 {
 	allegro_exit();
 	
 	return;
 }
 
-void TV::run() const
+/*
+ * increment the game speed counter.
+ * called at regular intervals (changeable via setSpeed)
+ * via interrupt
+ */
+void Game::incSpeedCounter ( void *inst )
+{
+	return;
+}
+
+/*
+ * main game loop
+ */
+void Game::run() const
 {
 	
 
 	return;
 }
+
+/*
+ * update the screen (duh!)
+ */
+void Game::updateScreen() const
+{
+	return;
+}
+
+inline void Game::setSpeed ( unsigned short speed )
+{
+	return;
+}
+
+} // namespace TV

@@ -12,6 +12,9 @@
 #include "exception.hxx"
 
 
+namespace TV
+{
+
 Exception::Exception ( const char* error, const severity_t severity )
 {
 	this->error = strdup(error);
@@ -84,3 +87,4 @@ char* Exception::getSeverityString() const
 	return errmsg;
 }
 
+} // namespace TV

@@ -7,6 +7,9 @@
 #ifndef EXCEPTION_HXX
 #define EXCEPTION_HXX
 
+namespace TV
+{
+
 typedef enum
 {
 	ERR_FATAL,
@@ -35,5 +38,6 @@ class Exception
 		char* getSeverityString() const;
 };
 
+}
 
 #endif

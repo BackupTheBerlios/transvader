@@ -7,23 +7,25 @@
 #include <allegro.h>
 
 #include "exception.hxx"
-#include "tv.hxx"
+#include "game.hxx"
 
+using TV::Game;
+using TV::Exception;
 
 int main ( int argc, char** argv )
 {
-	TV* tv;
+	Game* game;
 
 	try
 	{
-		tv = new TV();
+		game = new Game();
 	}
 	catch ( Exception& ex )
 	{
 		ex.handle();
 	}
 	
-	tv->run();
+	game->run();
 	
 	return(0);
 }

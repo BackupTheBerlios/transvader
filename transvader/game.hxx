@@ -7,13 +7,29 @@
 #ifndef TV_HXX
 #define TV_HXX
 
-class TV
+namespace TV
 {
-	public:
-		TV();
-		~TV();
+
+class Game
+{
+	private:
+		unsigned short speed;
 	
+		volatile unsigned short speedcounter;
+
+		static void incSpeedCounter ( void *inst );
+		void updateScreen() const;
+
+	public:
+		Game();
+		~Game();
+
+		inline void setSpeed ( unsigned short speed );
+		
 		void run() const;
+		
 };
+
+} // namespace TV
 
 #endif

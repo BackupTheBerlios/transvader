@@ -7,6 +7,9 @@
 #ifndef SPRITE_HXX
 #define SPRITE_HXX
 
+namespace TV
+{
+
 class Sprite
 {
 	private:
@@ -19,5 +22,7 @@ class Sprite
 	
 		virtual void draw() const = 0;
 }
+
+} // namespace TV
 
 #endif
