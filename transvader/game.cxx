@@ -96,9 +96,11 @@ END_OF_FUNCTION(incSpeedCounter)
 
 void Game::fps_timer(void *inst)
 {
-        (static_cast<Game*>(inst))->last_fps = (static_cast<Game*>(inst))->fps;
-        (static_cast<Game*>(inst))->fps=0;
-        (static_cast<Game*>(inst))->avg_fps=((static_cast<Game*>(inst))->avg_fps + (static_cast<Game*>(inst))->last_fps )/2;
+        Game* there = (static_cast<Game*>(inst));
+
+        there->last_fps = there->fps;
+        there->fps=0;
+        there->avg_fps=(there->avg_fps + there->last_fps )/2;
 
         return;
 }

@@ -1,5 +1,5 @@
-#ifndef DISPLAY_HXX
-#define DISPLAY_HXX
+#ifndef RECTANGLE_HXX
+#define RECTANGLE_HXX
 
 
 
@@ -13,13 +13,18 @@ class Rectangle
 
 	public:
 		Rectangle();
-		Rectangle ( unsigned short x, unsigned short y, unsigned short w, unsigned short h );
+		Rectangle (unsigned short x,unsigned short y,unsigned short w,unsigned short h );
 		Rectangle ( Rectangle& rect );
 		~Rectangle();
 	
 		bool doesTraverse ( Rectangle& rect );
 		int commonPixels ( Rectangle& rect );
 		Rectangle& unite ( Rectangle& rect );
+		
+		unsigned short getX();
+		unsigned short getY();
+		unsigned short getW();
+		unsigned short getH();
 };
 
 } // namespace TV
