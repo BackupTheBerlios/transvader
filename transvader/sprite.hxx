@@ -26,12 +26,13 @@ class Sprite /* base class */
 	
 		bool dirty;
 	
-		fixed x, y;
 		unsigned short width, height;
 		
 		Rectangle *currentBBox, *lastBBox;
 		
 	public:
+		/* ! temporarily public ! */
+		fixed x, y;	
 		fixed angle;	
 	
 		Sprite ( std::string );

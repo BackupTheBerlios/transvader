@@ -67,7 +67,7 @@ Game::Game()
 	install_sound ( DIGI_AUTODETECT, MIDI_AUTODETECT, NULL );
 	clear_to_color ( screen, makecol(0, 0, 0) );
 
-	this->setSpeed(10);
+	this->setSpeed(30);
 	
 	this->display = new Display();
 	
@@ -149,6 +149,28 @@ void Game::run()
 		
 		acquire_bitmap(screen);
 		{
+			BITMAP *black = create_bitmap ( 800, 20 );
+		
+			clear_to_color ( black, makecol(0,0,0) );
+		
+			blit ( black, screen, 0, 0, 0, 0, 800, 20 );
+		
+			textprintf ( screen, font, 0, 10,
+				makecol(0, 235, 0),
+				"Cycles left: %d | Angle: %d | Player: (%d,%d)",
+				this->speedcounter, fixtoi(this->player->angle),
+				fixtoi(this->player->x), fixtoi(this->player->y)
+				);
+
+	
+			/* write current and average fps on top of screen */
+	        	textprintf(screen, font, 0, 0, makecol(0,200,0),
+				"FPS: %d  Average FPS: %d",
+				this->last_fps, this->avg_fps);
+	
+			destroy_bitmap ( black );		
+		}
+		{
 			this->display->draw();
 		}
 		release_bitmap(screen);
@@ -156,7 +178,7 @@ void Game::run()
 		this->fps++;
 	}
 
-	delete this->player;
+	delete ( this->player );
 
 	return;
 }
@@ -171,7 +193,7 @@ void Game::updateData()
 	return;
 }
 
-/*
+/* OBSOLETE
  * draw. target algorithm: "dirty rectangles"
  */
 void Game::updateScreen()
@@ -182,14 +204,6 @@ void Game::updateScreen()
 	
 	/* write debugging information to top of screen */
 
-	textprintf ( screen, font, 0, 10,
-		makecol(0, 235, 0),
-		"Cycles left: %d | Angle: %d",
-		this->speedcounter, fixtoi(this->player->angle) );
-
-	
-	/*write current and avreage fps on top of screen*/
-        textprintf(screen,font,0,0,makecol(0,200,0),"FPS: %d  Average FPS: %d", this->last_fps, this->avg_fps);
 
 	/* draw player sprite */
 	this->player->draw ( screen );

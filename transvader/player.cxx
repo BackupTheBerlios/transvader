@@ -20,12 +20,13 @@ Player::Player ( std::string location )
 {
 	this->descString = "Player";
 
-	this->x = 100;
-	this->y = 300;
-	this->angle = 0;
+	this->x = itofix(100);
+	this->y = itofix(300);
+	this->angle = itofix(0);
 	
 	
-	this->currentBBox = new Rectangle ( this->x, this->y, this->width, this->height );	
+	this->currentBBox = new Rectangle ( fixtoi(this->x), fixtoi(this->y),
+		this->width, this->height );	
 	this->lastBBox = new Rectangle ( currentBBox );
 	
 	return;
@@ -40,7 +41,8 @@ Player::~Player()
 
 void Player::draw ( BITMAP* bitmap )
 {
-	rotate_sprite ( bitmap, this->default_image, this->x, this->y, itofix(64) );
+	rotate_sprite ( bitmap, this->default_image, fixtoi(this->x),
+		fixtoi(this->y), itofix(64) );
 
 	return;
 }
@@ -55,9 +57,9 @@ void Player::update()
 	delete ( lastBBox );
 	lastBBox = currentBBox;
 	
-	this->x += fixtoi(i+=ftofix(0.1));
+	this->x += itofix(2); //fixtoi(i+=ftofix(0.1));
 	
-	currentBBox = new Rectangle ( this->x, this->y, this->width, this->height );
+	currentBBox = new Rectangle ( fixtoi(this->x), fixtoi(this->y), this->width, this->height );
 	
 	return;
 }
