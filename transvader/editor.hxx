@@ -24,6 +24,9 @@ class Editor : public Application
 		virtual ~Editor();
 	
 		virtual void run();
+	
+		static void quit(void *data);
+		static void closeWin (void *data);
 
 	private:
 		static void mouse_cb ( BITMAP* bmp, int mx, int my, void* data );

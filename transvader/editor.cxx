@@ -11,31 +11,41 @@ Editor::Editor()
 	return;
 }
 
+
 Editor::~Editor()
 {
 	return;
 }
 
+
 void Editor::run()
 {
+	// Main window
+	MkDialogue(FILLSCREEN, "Transvader Level Editor", 0);
+	int result =  AddButton(TOPLEFT, "Exit Editor", quit, NULL);	
+	DisplayWin();
+	
+	// Level preview
 	MkDialogue(ADAPTIVE, "Level Preview", W_FLOATING);
-
 	MkCanvas ( 0, 0, 400, 300, mouse_cb, static_cast<void*>(this) );
 	DisplayWin();
 	
+	// Object palette
 	MkDialogue(ADAPTIVE, "Object Palette", W_FLOATING);
-	AddTextBox(RIGHT, "A simple window showing some buttons. Press the button to the left and you will get a new identical window.", 200, 0, 0);
+	MkCanvas ( 0, 0, 100, 200, mouse_cb, static_cast<void*>(this) );
+	//AddTextBox(RIGHT, "A simple window showing some buttons. Press the button to the left and you will get a new identical window.", 200, 0, 0);
 	DisplayWin();
 	
+	// Object properties
 	MkDialogue(ADAPTIVE, "Property Editor", W_FLOATING);
 	AddTextBox(RIGHT, "A simple window showing some buttons. Press the button to the left and you will get a new identical window.", 200, 0, 0);
 	DisplayWin();	
-	
 	
 	ProcessEvents();
 
 	return;
 }
+
 
 void Editor::mouse_cb ( BITMAP* bmp, int mx, int my, void* data )
 {
@@ -63,5 +73,20 @@ void Editor::mouse_cb ( BITMAP* bmp, int mx, int my, void* data )
 	
 	return;
 }
+
+
+void Editor::quit(void *data)
+{
+	(void)data;
+	StopProcessEvents();
+}
+
+
+void Editor::closeWin (void *data)
+{
+	(void)data;	
+	CloseWin(NULL);
+}
+
 
 } /* namespace TV */
