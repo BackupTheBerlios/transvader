@@ -4,6 +4,7 @@
 // This program is distributed under the GNU General Public License, for details read the file LICENSE 
 // at the root of this distribution
 
+#ifndef TYPES_HXX
 #define TYPES_HXX
 
 

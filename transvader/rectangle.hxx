@@ -2,6 +2,8 @@
 #define RECTANGLE_HXX
 
 
+#include "types.hxx"
+
 
 namespace TV
 {
@@ -15,11 +17,15 @@ class Rectangle
 		Rectangle();
 		Rectangle (unsigned short x,unsigned short y,unsigned short w,unsigned short h );
 		Rectangle ( Rectangle& rect );
+		
 		~Rectangle();
 
                 bool Rectangle::operator==(Rectangle& rect);
                 Rectangle& Rectangle::operator=(Rectangle& rect);
+		
 		bool doesTraverse ( Rectangle& rect );
+		bool doesTraverse ( Point& point );
+		
 		int commonPixels ( Rectangle& rect );
 		Rectangle& unite ( Rectangle& rect );
 
