@@ -28,7 +28,7 @@ class Rectangle
                 bool operator == ( const Rectangle& );
                 Rectangle& operator = ( Rectangle& );
                 Rectangle& operator + ( Rectangle& );
-		friend std::ostream& operator << ( std::ostream& , const Rectangle& );
+		std::ostream& operator << ( std::ostream& );
 		
 		bool doesTraverse ( Rectangle& );
 		bool doesTraverse ( Point& );

@@ -51,7 +51,7 @@ bool Rectangle::operator == ( const Rectangle& rect )
 		&& this->w == rect.w && this->h == rect.h );
 }
 
-/* asigns the values of one rectangle to another */
+/* assigns the values of one rectangle to another */
 
 Rectangle& Rectangle::operator = ( Rectangle& rect )
 {
@@ -63,39 +63,38 @@ Rectangle& Rectangle::operator = ( Rectangle& rect )
 	return ( *this );
 }
 
-std::ostream& operator << ( std::ostream& out, const Rectangle& rect )
+std::ostream& Rectangle::operator << ( std::ostream& out )
 {
-	out << "[" << rect.x << ", " << rect.y << " / "
-		<< rect.w << "x" << rect.h << "]";
+	out << "[" << this->x << ", " << this->y << " / "
+		<< this->w << "x" <<this->h << "]";
 
 	return out;
 }
 
 bool Rectangle::doesTraverse ( Rectangle& rect )
 {
-if (*this == rect)
-   return(true);
+	if (*this == rect)
+	   return(true);
 
-else if ( (this->y + this-> h) > (rect.y) )
-     return( ( (this->y + this->h) > (rect.y) ) && ( (this->x + this->w) > (rect.x) )
-          || ( (this->y + this->h) > (rect.y) ) && ( (this->x )          > (rect.x) ) ) ;
+	else if ( (this->y + this-> h) > (rect.y) )
+	     return( ( (this->y + this->h) > (rect.y) ) && ( (this->x + this->w) > (rect.x) )
+        	  || ( (this->y + this->h) > (rect.y) ) && ( (this->x )          > (rect.x) ) ) ;
 
-else if ( (this->y) < (rect.y + rect.h) )
-     return( ( (this->y + this->h) > (rect.y) ) && ( (this->x + this->w) > (rect.x) )
-          || ( (this->y + this->h) > (rect.y) ) && ( (this->x )          > (rect.x) ) );
+	else if ( (this->y) < (rect.y + rect.h) )
+	     return( ( (this->y + this->h) > (rect.y) ) && ( (this->x + this->w) > (rect.x) )
+        	  || ( (this->y + this->h) > (rect.y) ) && ( (this->x )          > (rect.x) ) );
 
-return(false);
+	return(false);
 }
 
 /* combines two rectangles to one*/
 
 Rectangle& Rectangle::operator + ( Rectangle& rect)
 {
-
-        if(this->x < rect.x)
+	if(this->x < rect.x)
                 rect.x = this->x;
 
-          if(this->y < rect.y)
+	if(this->y < rect.y)
                      rect.y = this->y;
 
            if( (this->y + this->h) < (rect.y + rect.h) )
@@ -140,7 +139,7 @@ int Rectangle::commonPixels ( Rectangle& rect )
     */
 
     rect = commonRectangle ( rect);
-    return(rect.h * rect.w);
+    return ( rect.h * rect.w );
 
 }
 
