@@ -3,7 +3,7 @@ General
 * put class declarations in header files.
 * header file suffix is '.hxx', implementation file suffix is ".cxx".
 * prefix objects from other namespaces at every occurence with their
-  proper name:
+  proper name, if they are not used often or part of TV:
   
   GOOD:
   	std::cout
