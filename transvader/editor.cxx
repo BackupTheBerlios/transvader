@@ -2,12 +2,13 @@
 #include <cgui.h>
 #include "palette.hxx"
 
+
 namespace TV
 {
 
 Editor::Editor()
 {
-	int ret = InitCgui ( 800, 600, 32 );
+	int ret = InitCgui ( 1024, 768, 32 );
 
 	return;
 }
@@ -21,28 +22,31 @@ Editor::~Editor()
 
 void Editor::run()
 {
+	int result;
+	
 	// Main window
 	MkDialogue(FILLSCREEN, "Transvader Level Editor", 0);
-	int result =  AddButton(TOPLEFT, "Exit Editor", quit, NULL);	
+	
+	// Menu bar
+	result = MakeMenuBar();
+	result = MkMenuBarItem("File", NULL, NULL);
+	result = MkMenuBarItem("Edit", NULL, NULL);
+	EndMenuBar();
+	
+	
+	//result =  AddButton(RIGHT, "Menu 1", quit, NULL);
+	//result =  AddButton(RIGHT, "Menu 2", quit, NULL);
+	//result =  AddButton(RIGHT, "Menu 3", quit, NULL);
+	result =  AddButton(RIGHT, "Exit Editor", quit, NULL);
+	
+	// Windows
+	MkCanvas (DOWNLEFT, 800, 692, mouse_cb, static_cast<void*>(this) );
+	MkCanvas (RIGHT, 213, 345, mouse_cb, static_cast<void*>(this) );
+	MkCanvas (DOWN, 213, 345, mouse_cb, static_cast<void*>(this) );
+	
 	DisplayWin();
 	
-	// Level preview
-	MkDialogue(ADAPTIVE, "Level Preview", W_FLOATING);
-	MkCanvas ( 0, 0, 400, 300, mouse_cb, static_cast<void*>(this) );
-	DisplayWin();
-	
-	// Object palette
-	Palette pal;
-	
-	//MkDialogue(ADAPTIVE, "Object Palette", W_FLOATING);
-	//MkCanvas ( 0, 0, 100, 200, mouse_cb, static_cast<void*>(this) );
-	//AddTextBox(RIGHT, "A simple window showing some buttons. Press the button to the left and you will get a new identical window.", 200, 0, 0);
-	//DisplayWin();
-	
-	// Object properties
-	MkDialogue(ADAPTIVE, "Property Editor", W_FLOATING);
-	AddTextBox(RIGHT, "A simple window showing some buttons. Press the button to the left and you will get a new identical window.", 200, 0, 0);
-	DisplayWin();	
+
 	
 	ProcessEvents();
 
@@ -93,3 +97,26 @@ void Editor::closeWin (void *data)
 
 
 } /* namespace TV */
+
+
+
+
+/* TEMP_CODE
+// Level preview
+//MkDialogue(DOWNLEFT, "Level Preview", W_FLOATING);
+//MkCanvas ( 0, 30, 800, 768, mouse_cb, static_cast<void*>(this) );
+//DisplayWin();
+
+// Object palette
+//Palette pal;
+
+//MkDialogue(ADAPTIVE, "Object Palette", W_FLOATING);
+//MkCanvas ( 0, 0, 100, 200, mouse_cb, static_cast<void*>(this) );
+//AddTextBox(RIGHT, "A simple window showing some buttons. Press the button to the left and you will get a new identical window.", 200, 0, 0);
+//DisplayWin();
+
+// Object properties
+//MkDialogue(ADAPTIVE, "Property Editor", W_FLOATING);
+//AddTextBox(RIGHT, "A simple window showing some buttons. Press the button to the left and you will get a new identical window.", 200, 0, 0);
+//DisplayWin();	
+*/

@@ -25,6 +25,7 @@ class Palette
 	public:
 		Palette();
 		~Palette();
+		static void dummy(BITMAP* bmp, int a, int b, void *data);
 	
 	private:
 };
