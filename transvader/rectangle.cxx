@@ -53,6 +53,70 @@ Rectangle& Rectangle::operator= ( Rectangle& rect )
 	return ( *this );
 }
 
+bool Rectangle::doesTraverse ( Rectangle& rect )
+{
+if (*this == rect)
+   return(true);
+
+else if ( (this->y + this-> h) > (rect.y) )
+     return( ( (this->y + this->h) > (rect.y) ) && ( (this->x + this->w) > (rect.x) )
+          || ( (this->y + this->h) > (rect.y) ) && ( (this->x )          > (rect.x) ) ) ;
+
+else if ( (this->y) < (rect.y + rect.h) )
+     return( ( (this->y + this->h) > (rect.y) ) && ( (this->x + this->w) > (rect.x) )
+          || ( (this->y + this->h) > (rect.y) ) && ( (this->x )          > (rect.x) ) );
+}
+
+/* combines two rectangles to one*/
+
+Rectangle& Rectangle::unite(Rectangle& rect)
+{
+
+        if(this->x < rect.x)
+                rect.x = this->x;
+
+          if(this->y < rect.y)
+                     rect.y = this->y;
+
+           if( (this->y + this->h) < (rect.y + rect.h) )
+                      rect.h = ( (rect.y + rect.h) - this->y);
+           else if ( (this->y + this->h) > (rect.y + rect.h) )
+                      rect.h = ( (this->y + this->h)  + rect.y);
+
+           if( (this->x + this->w) < (rect.x + rect.w) )
+                      rect.w = ( (rect.x + rect.w) - this->x);
+           else if ( (this->x + this->w) > (rect.x + rect.w) )
+                      rect.w = ( (this->x + this->w) + rect.x);
+
+           return(rect);
+
+}
+
+/* calculates the amount of pixels both rectangles share with each other */
+
+int Rectangle::commonPixels ( Rectangle& rect )
+{
+    int common_w = 0;
+    int common_h = 0;
+
+    if( (this->y + this->h) < (rect.y + rect.h) )
+        common_h = rect.h  - ( (rect.y + rect.h) - (this->y + this->h) );
+    else if ( (this->y + this->h) > (rect.y + rect.h) )
+        common_h = this->h - ( (this->y + this->h) - (rect.y + rect.h) );
+    else
+        common_h = this->h;
+
+    if( (this->x + this->w) < (rect.x + rect.w) )
+        common_w = rect.w  - ( (rect.x + rect.w) - (this->x + this->w) );
+    else if ( (this->x + this->w) > (rect.x + rect.w) )
+        common_w = this->w - ( (this->x + this->w) - (rect.x + rect.w) );
+    else
+        common_w = this->w;
+
+    return(common_h * common_w);
+
+}
+
 /* get coordinates of the rectangle */
 
 unsigned short Rectangle::getX()

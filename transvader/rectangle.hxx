@@ -27,7 +27,7 @@ class Rectangle
 		bool doesTraverse ( Point& point );
 		
 		int commonPixels ( Rectangle& rect );
-		Rectangle& unite ( Rectangle& rect );
+		Rectangle& Rectangle::unite(Rectangle& rect);
 
 		unsigned short getX();
 		unsigned short getY();
