@@ -7,6 +7,10 @@
 #ifndef EDITOR_HXX
 #define EDITOR_HXX
 
+#include <allegro.h>
+
+#include <iostream>
+
 #include "application.hxx"
 
 
@@ -21,6 +25,8 @@ class Editor : public Application
 	
 		virtual void run();
 
+	private:
+		static void mouse_cb ( BITMAP* bmp, int mx, int my, void* data );
 };
 
 } // namespace TV
