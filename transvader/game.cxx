@@ -117,7 +117,7 @@ void Game::run() const
  * TODO: implement simple "dirty" flag for whole screen to avoid
  * absolutely unnecessary blitting operations
  */
-void Game::updateScreen() const
+void Game::updateScreen()
 {
 	/* clear double buffer to color 0 */
 	clear_bitmap ( this->dblbuffer );

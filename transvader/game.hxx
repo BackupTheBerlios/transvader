@@ -21,7 +21,7 @@ class Game
 		unsigned short speed;
 
 
-		void updateScreen() const;
+		void updateScreen();
 
 	public:
 		Game();
