@@ -1,6 +1,7 @@
 #ifndef DISPLAY_HXX
 #define DISPLAY_HXX
 
+#include <allegro.h>
 
 namespace TV
 {

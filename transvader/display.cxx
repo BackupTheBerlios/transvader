@@ -4,14 +4,13 @@
 namespace TV
 {
 
-Display::Display();
-virtual Display::~Display();
+Display::Display()
+{
+}
 
-virtual BITMAP *Display::getBMP()
-{}
-virtual void Display::draw()
-{}
 
-};
+Display::~Display()
+{
+}
 
 } // namespace TV

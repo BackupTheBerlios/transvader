@@ -1,4 +1,6 @@
+
 #include <allegro.h>
+
 #include "exception.hxx"
 #include "pageflipper.hxx"
 
@@ -6,22 +8,29 @@
 namespace TV
 {
 
-Pageflipper::Pageflipper(int width, int height)
+Pageflipper::Pageflipper ( int width, int height )
 {
 
-        backbuf = create_video_bitmap(width, height);
-        framebuf = create_video_bitmap(width, height);
-        clear(framebuf);
-
-        if ((!backbuf) || (!framebuf))
+        backbuf = create_video_bitmap ( width, height );
+        if ( backbuf == NULL )
         {
-	   throw Exception ( std::string("Unable to create two video memory buffer\n")
-	   + std::string(")"), ERR_FATAL );
+	   throw Exception ( std::string("Unable to create buffer 1.\n")
+	   	+ std::string(")"), ERR_FATAL );
         }
+	
+        framebuf = create_video_bitmap ( width, height );
+        if ( framebuf == NULL )
+        {
+	   throw Exception ( std::string("Unable to create buffer 2.\n")
+	   	+ std::string(")"), ERR_FATAL );
+        }
+
+        clear(framebuf);
 
         activebuf = framebuf;
 
 }
+
 
 Pageflipper::~Pageflipper()
 {
@@ -29,9 +38,9 @@ Pageflipper::~Pageflipper()
         destroy_bitmap(framebuf);
 }
 
+
 void Pageflipper::draw()
 {
-     !DRAW PLEASE!
      show_video_bitmap(activebuf);
 
      if (activebuf == backbuf)
@@ -43,7 +52,10 @@ void Pageflipper::draw()
 }
 
 
-virtual BITMAP *Pageflipper::getBMP();
+BITMAP *Pageflipper::getBMP()
+{
+	return ( this->activebuf );
+}
 
 } /*namespace TV */
 

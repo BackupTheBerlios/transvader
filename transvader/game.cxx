@@ -25,7 +25,8 @@ namespace TV
  * initialize drivers and some things more
 */
 Game::Game()
-: speedcounter(0)
+	:
+	speedcounter(0)
 {
 	/* initialize Allegro */
 	if ( install_allegro ( SYSTEM_AUTODETECT, &errno, atexit ) )
@@ -35,10 +36,10 @@ Game::Game()
 	}
 
 	/* init graphics mode */
-	set_color_depth(16);
+	set_color_depth(32);
 	set_color_conversion ( COLORCONV_TOTAL | COLORCONV_DITHER | COLORCONV_KEEP_TRANS );
 	
-	if ( set_gfx_mode ( GFX_AUTODETECT_WINDOWED, 800, 600, 0, 0 ) < 0 )
+	if ( set_gfx_mode ( GFX_AUTODETECT_WINDOWED, 800, 600, 1600, 600 ) < 0 )
 	{
 		throw Exception ( std::string("Could not set graphics mode (")
 			+ allegro_error + std::string(")"), ERR_FATAL );

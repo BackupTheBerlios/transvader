@@ -3,6 +3,8 @@
 
 #include <allegro.h>
 
+#include "display.hxx"
+
 namespace TV
 {
 
@@ -15,10 +17,10 @@ class Pageflipper : public Display
                BITMAP *activebuf;
 
         public:
-               Pageflipper(int width, int height)
+               Pageflipper ( int width, int height );
                ~Pageflipper();
 
-               virtual BITMAP getBMP();
+               virtual BITMAP *getBMP();
                void draw();
 
 

@@ -6,9 +6,9 @@
 
 BIN=transvader
 OBJ=main.o sprite.o player.o exception.o game.o rectangle.o backdrop.o foe.o \
-	display.o
+	display.o pageflipper.o
 SRC=main.cxx sprite.cxx player.cxx exception.cxx game.cxx rectangle.cxx \
-	backdrop.cxx foe.cxx display.cxx
+	backdrop.cxx foe.cxx display.cxx pageflipper.cxx
     
     
 
