@@ -2,24 +2,20 @@
 
 import os;
 
-CCFLAGS = ''
+CCFLAGS = '-O -Wall -Wuninitialized -Wunused'
 LINKFLAGS = ''
 CPPPATH = '../include'
 
-# strategy for QTDIR:
-# check if it is set
-#   - if yes, use it and skip auto-detection
-#   - if no, try to find it automatically
-# also! check if library is qt or qt-mt
-
 sources = [Split("""main.cxx
 	dragobject.cxx
+	editorobject.cxx
+	iconviewitem.cxx
 	maingui.cxx
 	palette.cxx
 	preview.cxx""")]
 
 
-env = Environment( tools = ['default', 'qt'] );
+env = Environment( tools = ['default', 'qt'], CCFLAGS = CCFLAGS );
 dict = env.Dictionary();
 
 if ( not dict.has_key('QTDIR') ):
@@ -38,6 +34,9 @@ if ( env['QTDIR'] is None ):
 			env["QTDIR"] = loc
 			break
 # FIXME: qt-mt
+
+if ( os.path.exists ( loc + "/lib/libqt-mt.so" ) ):
+	env['QT_LIB'] = "qt-mt"
 
 #print env['TOOLS']
 #print env['CPPPATH']

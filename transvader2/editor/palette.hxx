@@ -4,6 +4,9 @@
 #include <qiconview.h>
 #include <qdragobject.h>
 
+#include "dragobject.hxx"
+#include "iconviewitem.hxx"
+
 namespace TV
 {
 

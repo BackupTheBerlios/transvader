@@ -1,7 +1,4 @@
-#ifndef EDITOR_DRAGOBJECT_HXX
-#define EDITOR_DRAGOBJECT_HXX
-
-#include <qdragobject.h>
+#include "dragobject.hxx"
 
 
 namespace TV
@@ -11,19 +8,24 @@ namespace Editor
 {
 
 
-class DragObject : public QStoredDrag
+DragObject::DragObject ( const char* mimeType, QWidget* dragSource, const char* name )
+	: QStoredDrag ( mimeType, dragSource, name )
 {
-	Q_OBJECT
-		
-	DragObject();
-	~DragObject();
-};
+}
+
+
+DragObject::DragObject ( QWidget* dragSource, const char* name)
+	: QStoredDrag ( "application/x-transvader", dragSource, name )
+{
+}
+
+
+DragObject::~DragObject()
+{
+}
 
 
 } // ns Editor
 
 } // ns TV
 
-#include "dragobject.moc"
-
-#endif

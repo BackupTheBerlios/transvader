@@ -32,7 +32,7 @@ Preview::~Preview()
 void Preview::dropEvent ( QDropEvent *event )
 {
 	qDebug("dropEvent(): Drop! Target: we@%d:%d | Available Formats:",
-		event->pos().x(), event->pos().y(), event->format() );
+		event->pos().x(), event->pos().y() );
 	
 	int n = 0;
 	
@@ -43,6 +43,10 @@ void Preview::dropEvent ( QDropEvent *event )
 	}
 
 
+	return; 
+	
+	/***** migrating to new code, code below for reference only *****/
+	
 	QImage* image = new QImage();
 
 	if (!QImageDrag::canDecode(event))
@@ -122,8 +126,8 @@ void Preview::drawMaskedQImage ( const QPoint& pos, const QImage& image )
 
 void Preview::dragEnterEvent ( QDragEnterEvent* event )
 {
-	event->accept( QImageDrag::canDecode(event) );
-	//event->accept( true );
+	//event->accept( QImageDrag::canDecode(event) );
+	event->accept( true );
 	
 	return;
 }
