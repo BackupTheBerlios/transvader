@@ -12,11 +12,6 @@
 namespace TV
 {
 
-struct Point
-{
-	unsigned short x, y;
-};
-
 } // namespace TV
 
 #endif

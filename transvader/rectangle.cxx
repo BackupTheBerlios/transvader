@@ -1,8 +1,14 @@
-// This file is a part of the Transvader sourcecode. Transvader is a free Asteroids clone distributed under GPL
-// Copyright (C) 2004  Michael Prinzinger, Leslie Polzer
-// The full copyright notice can be found in the file DISCLAIMER at the root of this distribution.
-// This program is distributed under the GNU General Public License, for details read the file LICENSE 
-// at the root of this distribution
+/******************************************************************************
+ *  rectangle.cxx
+ *
+ *  Implements rectangles.
+ *
+ *  Author: Michael Prinzinger, Leslie Polzer, Mark Roesel
+ *  Created: 2004-??-?? / Last updated: 2004-06-26
+ *  
+ *  For licensing conditions see the file LICENSE which should be included
+ *  within this distribution.
+ ******************************************************************************/
 
 #include <iostream>
 
@@ -14,104 +20,118 @@ namespace TV
 
 
 Rectangle::Rectangle()
-	: x(0), y(0), w(0), h(0)
+	:
+	p(0,0),
+	w(0),
+	h(0)
 {
+	return;
 }
 
 
 Rectangle::~Rectangle()
 {
+	return;
 }
 
-Rectangle::Rectangle ( unsigned short new_x, unsigned short new_y,
-			unsigned short new_w,unsigned short new_h )
+
+Rectangle::Rectangle ( Point new_p, int new_w, int new_h )
 	:
-	x(new_x), y(new_y), w(new_w), h(new_h)
+	p(new_p),
+	w(new_w),
+	h(new_h)
 {
+	return;
 }
+
 
 Rectangle::Rectangle ( Rectangle& rect )
 	:
-	x(rect.x), y(rect.y), w(rect.w), h(rect.h)
+	p(rect.getP()),
+	w(rect.getW()),
+	h(rect.getH())
 {
+	return;
 }
+
 
 Rectangle::Rectangle ( Rectangle* rect )
 	:
-	x(rect->x), y(rect->y), w(rect->w), h(rect->h)
+	p(rect->getP()),
+	w(rect->getW()),
+	h(rect->getH())
 {
+	return;
 }
 
 
 /* 
  * compares two rectangles and returs if they are equal or not 
  */
-
 bool Rectangle::operator == ( const Rectangle& rect )
 {
-	return ( this->x == rect.x && this->y == rect.y
-		&& this->w == rect.w && this->h == rect.h );
+	return ( this->p == rect.getP()
+		  && this->w == rect.getW()
+		  && this->h == rect.getH() );
 }
+
 
 /* 
  * assigns the values of one rectangle to another 
  */
-
 Rectangle& Rectangle::operator = ( Rectangle& rect )
 {
-	this->x = rect.x;
-	this->y = rect.y;
-	this->w = rect.w;
-	this->h = rect.h;
+	this->p = rect.getP();
+	this->w = rect.getW();
+	this->h = rect.getH();
 
 	return ( *this );
 }
 
-std::ostream& Rectangle::operator << ( std::ostream& out )
-{
-	out << "[" << this->x << ", " << this->y << " / "
-		<< this->w << "x" <<this->h << "]";
 
-	return out;
-}
-
-bool Rectangle::doesTraverse ( Rectangle& rect )
+bool Rectangle::intersects ( Rectangle& rect )
 {
 	if (*this == rect)
 	   return(true);
 
-	else if ( (this->y + this-> h) > (rect.y) )
-	     return( ( (this->y + this->h) > (rect.y) ) && ( (this->x + this->w) > (rect.x) )
-        	  || ( (this->y + this->h) > (rect.y) ) && ( (this->x )          > (rect.x) ) ) ;
+	else if ( (this->p.y + this->h) > (rect.getP().y) )
+	     return( ( (this->p.y + this->h) > (rect.getP().y) ) && ( (this->p.x + this->w) > (rect.getP().x) )
+        	  || ( (this->p.y + this->h) > (rect.getP().y) ) && ( (this->p.x )          > (rect.getP().x) ) ) ;
 
-	else if ( (this->y) < (rect.y + rect.h) )
-	     return( ( (this->y + this->h) > (rect.y) ) && ( (this->x + this->w) > (rect.x) )
-        	  || ( (this->y + this->h) > (rect.y) ) && ( (this->x )          > (rect.x) ) );
+	else if ( this->p.y < (rect.getP().y + rect.getH()) )
+	     return( ( (this->p.y + this->h) > (rect.getP().y) ) && ( (this->p.x + this->w) > (rect.getP().x) )
+        	  || ( (this->p.y + this->h) > (rect.getP().y) ) && ( (this->p.x )          > (rect.getP().x) ) );
 
 	return(false);
 }
 
+
+bool Rectangle::intersects ( Point& point )
+{
+	return ( false ); //edit me!!!!!!!!!!! Na los, Michael!! ;-P
+}
+
+
 /* 
  * combines two rectangles to one 
  */
-
 Rectangle& Rectangle::operator + ( Rectangle& rect)
 {
-	if(this->x < rect.x)
-                rect.x = this->x;
+	if(this->p.x < rect.getP().x)
+                rect.getP().x = this->p.x;
 
-	if(this->y < rect.y)
-                rect.y = this->y;
+	if(this->p.y < rect.getP().y)
+                rect.getP().y = this->p.y;
 
-        if( (this->y + this->h) < (rect.y + rect.h) )
-                rect.h = ( (rect.y + rect.h) - this->y);
-        else if ( (this->y + this->h) > (rect.y + rect.h) )
-                rect.h = ( (this->y + this->h)  + rect.y);
+        if( (this->p.y + this->h) < (rect.getP().y + rect.getH()) )
+                rect.setH( (rect.getP().y + rect.getH()) - this->p.y);
+        else if ( (this->p.y + this->h) > (rect.getP().y + rect.getH()) )
+                rect.setH( (this->p.y + this->h)  + rect.getP().y);
 
-        if( (this->x + this->w) < (rect.x + rect.w) )
-                rect.w = ( (rect.x + rect.w) - this->x);
-        else if ( (this->x + this->w) > (rect.x + rect.w) )
-                rect.w = ( (this->x + this->w) + rect.x);
+        if( (this->p.x + this->w) < (rect.getP().x + rect.getW()) )
+                rect.setW( (rect.getP().x + rect.getW()) - this->p.x);
+        else if ( (this->p.x + this->w) > (rect.getP().x + rect.getW()) )
+                rect.setW( (this->p.x + this->w) + rect.getP().x);
 
         return(rect);
 
@@ -143,7 +163,7 @@ Rectangle& Rectangle::operator -= ( int pixel)
 int Rectangle::commonPixels ( Rectangle& rect )
 {
     rect = commonRectangle ( rect);
-    return ( rect.h * rect.w );
+    return ( rect.getH() * rect.getW() );
 
 }
 
@@ -153,44 +173,41 @@ int Rectangle::commonPixels ( Rectangle& rect )
 
 Rectangle& Rectangle::commonRectangle ( Rectangle& rect)
 {
-    int common_x = 0;
-    int common_y = 0;
-    int common_h = 0;
-    int common_w = 0;
+    int common_x = 0, common_y = 0, common_h = 0, common_w = 0;
 
-    if( (this->y + this->h) < (rect.y + rect.h) )
+    if( (this->p.y + this->h) < (rect.getP().y + rect.getH()) )
     {
-        common_h = rect.h  - ( (rect.y + rect.h) - (this->y + this->h) );
-        common_y = rect.y;
+        common_h = rect.getH()  - ( (rect.getP().y + rect.getH()) - (this->p.y + this->h) );
+        common_y = rect.getP().y;
     }
-    else if ( (this->y + this->h) > (rect.y + rect.h) )
+    else if ( (this->p.y + this->h) > (rect.getP().y + rect.getH()) )
     {
-        common_h = this->h - ( (this->y + this->h) - (rect.y + rect.h) );
-        common_y = this->y;
+        common_h = this->h - ( (this->p.y + this->h) - (rect.getP().y + rect.getH()) );
+        common_y = this->p.y;
     }
     else
     {
         common_h = this->h;
-        common_y = this->y;
+        common_y = this->p.y;
     }
 
-    if( (this->x + this->w) < (rect.x + rect.w) )
+    if( (this->p.x + this->w) < (rect.getP().x + rect.getW()) )
     {
-        common_w = rect.w  - ( (rect.x + rect.w) - (this->x + this->w) );
-        common_x = rect.x;
+        common_w = rect.getW()  - ( (rect.getP().x + rect.getW()) - (this->p.x + this->w) );
+        common_x = rect.getP().x;
     }
-    else if ( (this->x + this->w) > (rect.x + rect.w) )
+    else if ( (this->p.x + this->w) > (rect.getP().x + rect.getW()) )
     {
-        common_w = this->w - ( (this->x + this->w) - (rect.x + rect.w) );
-        common_x = this->x;
+        common_w = this->w - ( (this->p.x + this->w) - (rect.getP().x + rect.getW()) );
+        common_x = this->p.x;
     }
     else
     {
         common_w = this->w;
-        common_x = this->x;
+        common_x = this->p.x;
     }
-    this->x = common_x;
-    this->y = common_y;
+    this->p.x = common_x;
+    this->p.y = common_y;
     this->h = common_w;
     this->w = common_h;
     return( *this );
@@ -200,24 +217,38 @@ Rectangle& Rectangle::commonRectangle ( Rectangle& rect)
  * get coordinates of the rectangle 
  */
 
-unsigned short Rectangle::getX()
+Point Rectangle::getP() const
 {
-	return ( this->x );
+	return ( this->p );
 }
 
-unsigned short Rectangle::getY()
-{
-	return ( this->y );
-}
-
-unsigned short Rectangle::getW()
+int Rectangle::getW() const
 {
 	return ( this->w );
 }
 
-unsigned short Rectangle::getH()
+int Rectangle::getH() const
 {
 	return ( this->h );
+}
+
+/* 
+ * set coordinates of the rectangle 
+ */
+
+void Rectangle::setP(Point new_p)
+{
+	this->p = new_p;	
+}
+
+void Rectangle::setW(int new_w)
+{
+	this->w = new_w;
+}
+
+void Rectangle::setH(int new_h)
+{
+	this->h = new_h;
 }
 
 
@@ -225,19 +256,18 @@ unsigned short Rectangle::getH()
  * sets coordinates of the rectangle
  */
 
-void Rectangle::setCoordinates (unsigned short new_x, unsigned short new_y, unsigned short new_h, unsigned short new_w)
+void Rectangle::setCoordinates (Point new_p, int new_h, int new_w)
 {
-        this->x = new_x;
-        this->y = new_y;
+        this->p = new_p;
         this->h = new_h;
         this->w = new_w;
 }
 
-bool Rectangle::doesTraverse ( Point& point )
+std::ostream& operator << ( std::ostream& out, const Rectangle& r )
 {
-	return ( false ); //edit me
+	out << "[" << r.p << " / " << r.w << "x" << r.h << "]";
+
+	return out;
 }
 
-} /* 
-   * namespace TV 
-   */
+} // namespace TV

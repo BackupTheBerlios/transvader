@@ -7,7 +7,7 @@
 
 BIN=transvader.exe
 
-OBJ=main.o sprite.o player.o exception.o game.o rectangle.o backdrop.o foe.o doublebuffer.o display.o application.o editor.o
+OBJ=main.o sprite.o player.o exception.o game.o rectangle.o backdrop.o foe.o doublebuffer.o display.o application.o editor.o point.o
 
 SRC=$(OBJ:%.o=%.cxx)
 
@@ -33,4 +33,3 @@ dep: $(SRC)
 	$(CXX) -MM $(SRC) > $(DEPENDFILE)
 
 -include $(DEPENDFILE)
-

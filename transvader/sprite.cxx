@@ -19,9 +19,9 @@ namespace TV
 
 Sprite::Sprite ( std::string location )
 	:
-	angle(0),
+	description("A generic sprite"),
 	type("Generic"),
-	description("A generic sprite")
+	angle(0)
 {
 	std::cout << "Attempt to create new sprite from \""
 		<< location << + "\"... " ;

@@ -1,16 +1,21 @@
-// This file is a part of the Transvader sourcecode. Transvader is a free Asteroids clone distributed under GPL
-// Copyright (C) 2004  Leslie P. Polzer, Michael Prinzinger
-// The full copyright notice can be found in the file DISCLAIMER at the root of this distribution.
-// This program is distributed under the GNU General Public License, for details read the file LICENSE 
-// at the root of this distribution
+/******************************************************************************
+ *  rectangle.cxx
+ *
+ *  Implements rectangles.
+ *
+ *  Author: Michael Prinzinger, Leslie Polzer, Mark Roesel
+ *  Created: 2004-??-?? / Last updated: 2004-06-26
+ *  
+ *  For licensing conditions see the file LICENSE which should be included
+ *  within this distribution.
+ ******************************************************************************/
 
 #ifndef RECTANGLE_HXX
 #define RECTANGLE_HXX
 
-
 #include <iostream>
 
-#include "types.hxx"
+#include "point.hxx"
 
 
 namespace TV
@@ -21,11 +26,9 @@ class Rectangle
 	
 
 	public:
-		unsigned short x, y, w, h;
 		
 		Rectangle ();
-		Rectangle ( unsigned short, unsigned short,
-				unsigned short, unsigned short );
+		Rectangle ( Point new_p, int new_w, int new_h );
 		Rectangle ( Rectangle& );
 		Rectangle ( Rectangle* );		
 		
@@ -36,22 +39,33 @@ class Rectangle
         Rectangle& operator + ( Rectangle& );
         Rectangle& operator += ( int );
         Rectangle& operator -= ( int );
-		std::ostream& operator << ( std::ostream& );
-		
-		bool doesTraverse ( Rectangle& );
-		bool doesTraverse ( Point& );
+	
+		bool intersects ( Rectangle& );
+		bool intersects ( Point& );
 		
 		int commonPixels ( Rectangle& );
 		Rectangle& commonRectangle ( Rectangle& );
 
-		unsigned short getX();
-		unsigned short getY();
-		unsigned short getW();
-		unsigned short getH();
+		Point getP() const;
+		int getW() const;
+		int getH() const;
 		
-		void setCoordinates (unsigned short, unsigned short, unsigned short, unsigned short);
+		void setP(Point new_p);
+		void setW(int new_w);
+		void setH(int new_h);
 		
+		void setCoordinates (Point new_p, int new_w, int new_h);
+
+		friend std::ostream& operator << ( std::ostream&, const Rectangle& );
+		
+		private:
+			
+			Point p;	
+			int w, h;
+	
 };
+
+
 
 } // namespace TV
 
