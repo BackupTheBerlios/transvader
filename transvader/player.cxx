@@ -4,10 +4,15 @@
 // This program is distributed under the GNU General Public License, for details read the file LICENSE 
 // at the root of this distribution
 
+#include <string>
+
 #include "player.hxx"
 
 
-Player ( string location = "data/player/level1.tga" )
+namespace TV
+{
+
+Player::Player ( std::string location )
 	:
 	Sprite ( location )
 {
@@ -15,9 +20,10 @@ Player ( string location = "data/player/level1.tga" )
 }
 
 
-~Player()
+Player::~Player()
 {
 	return;
 }
 
 
+} /* namespace TV */

@@ -5,8 +5,8 @@
 # at the root of this distribution
 
 BIN=transvader
-OBJ=main.o sprite.o exception.o game.o
-SRC=main.cxx sprite.cxx exception.cxx game.cxx
+OBJ=main.o sprite.o player.o exception.o game.o 
+SRC=main.cxx sprite.cxx player.o exception.cxx game.cxx 
 
 ALLEG_CXXFLAGS=`allegro-config --cflags`
 # linker flags need to be fixed because allegro-config doesn't generate output

@@ -13,6 +13,8 @@
 #include <allegro.h>
 
 #include "exception.hxx"
+#include "player.hxx"
+
 #include "game.hxx"
 
 
@@ -97,6 +99,8 @@ END_OF_FUNCTION(incSpeedCounter)
 void Game::run()
 {
 	int c = 0;
+
+	Player *player = new Player();
 
 	while ( ( c >> 8 ) != KEY_ESC )
 	{
