@@ -68,7 +68,7 @@ Game::Game()
 	install_sound ( DIGI_AUTODETECT, MIDI_AUTODETECT, NULL );
 	clear_to_color ( screen, makecol(0, 0, 0) );
 
-	this->setSpeed(15);
+	this->setSpeed(50);
 	
 	this->display = new Display();
 	
@@ -142,13 +142,9 @@ void Game::run()
 
 		while ( this->speedcounter > 0 )
 		{
-
-                        textprintf ( screen, font, 0, 40, 
-                makecol(0, 235, 0), "x %d", this->speedcounter);
                         this->updateData();
 			speedcounter--;
 		}
-
 
 		vsync();
 
