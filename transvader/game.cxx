@@ -28,7 +28,7 @@ const unsigned short res_y = 600;
 const unsigned short depth =   32;
 const unsigned short gameSpeed =   50;
 
-/* 
+/*! 
  * initialize drivers and some things more
 */
 Game::Game()
@@ -48,7 +48,7 @@ Game::Game()
 
 
 	/* FIXME: only for PF! */
-        #ifdef ALLEGRO_VRAM_SINGLE_SURFACE
+    #ifdef ALLEGRO_VRAM_SINGLE_SURFACE
 		int ret = set_gfx_mode ( GFX_AUTODETECT_WINDOWED,
 			res_x, res_y, res_x*2, res_y );
 	#else
@@ -76,11 +76,11 @@ Game::Game()
 	install_timer();
 
 	this->fps = 0;
-        this->avg_fps = 1;
-        this->last_fps = 0;
+    this->avg_fps = 1;
+    this->last_fps = 0;
 
-        LOCK_VARIABLE(this->fps);
-        LOCK_FUNCTION(Game::fps_timer);
+    LOCK_VARIABLE(this->fps);
+    LOCK_FUNCTION(Game::fps_timer);
 	install_param_int_ex( Game::fps_timer, static_cast<void*>(this),
 		              SECS_TO_TIMER(1) );
 
@@ -89,6 +89,7 @@ Game::Game()
 
 	this->setSpeed(gameSpeed);
 
+	/* page flipper currently does not work on Windows */
 	#ifdef ALLEGRO_WINDOWS
 		this->display = new Doublebuffer ( SCREEN_W, SCREEN_H );
 	#else
@@ -99,19 +100,21 @@ Game::Game()
 
 }
 
+/*! clean up */
 Game::~Game()
 {
-	//delete ( this->display );
+	delete ( this->display );
 
 	allegro_exit();
 	
 	return;
 }
 
-/*
+/*!
  * increment the game speed counter.
  * called at regular intervals ( changeable via setSpeed() )
  * via interrupt
+ * \param inst The current instance of "Game"
  */
 void Game::incSpeedCounter ( void *inst )
 {
@@ -121,10 +124,11 @@ void Game::incSpeedCounter ( void *inst )
 }
 END_OF_FUNCTION(incSpeedCounter)
 
-/*
+/*!
  * sets the fps counter variable = 0.
  * called every 1 second by install_param_int_ex above.
  * it also calculates the average fps value
+ * \param inst The current instance of "Game"
  */
 
 void Game::fps_timer(void *inst)
@@ -132,8 +136,8 @@ void Game::fps_timer(void *inst)
         Game* there = (static_cast<Game*>(inst));
 
         there->last_fps = there->fps;
-        there->fps=0;
-        there->avg_fps=(there->avg_fps + there->last_fps )/2;
+        there->fps = 0;
+        there->avg_fps = (there->avg_fps + there->last_fps ) / 2;
 
         return;
 }
@@ -141,7 +145,7 @@ END_OF_STATIC_FUNCTION(fps_timer);
 
 
 
-/*
+/*!
  * main game loop
  */
 void Game::run()
@@ -159,12 +163,15 @@ void Game::run()
 
 		while ( this->speedcounter > 0 )
 		{
-                        this->updateData();
+            this->updateData();
 			speedcounter--;
 		}
 
 		clear_bitmap ( this->display->getBitmap() );
 		
+		/* FIXME: could we please move those text output
+			to separate methods? */
+		/* write debugging info */
 		textprintf ( this->display->getBitmap(), font, 0, 10,
 			makecol(0, 235, 0),
 			"Cycles left: %d | Angle: %d | Player: (%d,%d)",
@@ -179,7 +186,7 @@ void Game::run()
 
 		this->player->draw ( this->display->getBitmap() );
 
-                this->display->draw();
+        this->display->draw();
 
 
 		this->fps++;
@@ -190,9 +197,7 @@ void Game::run()
 	return;
 }
 
-/*
- * update game data
- */
+//! update game data, currently player-only
 void Game::updateData()
 {
 	this->player->update();
@@ -200,14 +205,7 @@ void Game::updateData()
 	return;
 }
 
-/* OBSOLETE
- * draw. target algorithm: "dirty rectangles"
- */
-void Game::updateScreen()
-{
-	return;
-}
-
+//! (re-)initialize timer for the speed counter
 inline void Game::setSpeed ( unsigned short speed )
 {
 	remove_param_int ( Game::incSpeedCounter, static_cast<void*>(this) );
@@ -217,14 +215,8 @@ inline void Game::setSpeed ( unsigned short speed )
 
 	install_param_int_ex( Game::incSpeedCounter, static_cast<void*>(this),
 		BPS_TO_TIMER(speed) ); //FIXME: error checking
-
+	
 	return;
 }
-
-//FPS Timer
-
-
-
-
 
 } // namespace TV

@@ -31,11 +31,11 @@ class Rectangle
 		
 		~Rectangle();
 
-                bool operator == ( const Rectangle& );
-                Rectangle& operator = ( Rectangle& );
-                Rectangle& operator + ( Rectangle& );
-                Rectangle& operator += ( int );
-                Rectangle& operator -= ( int );
+        bool operator == ( const Rectangle& );
+        Rectangle& operator = ( Rectangle& );
+        Rectangle& operator + ( Rectangle& );
+        Rectangle& operator += ( int );
+        Rectangle& operator -= ( int );
 		std::ostream& operator << ( std::ostream& );
 		
 		bool doesTraverse ( Rectangle& );
@@ -50,10 +50,6 @@ class Rectangle
 		unsigned short getH();
 		
 		void setCoordinates (unsigned short, unsigned short, unsigned short, unsigned short);
-		void setX(unsigned short new_x);
-		void setY(unsigned short new_y);
-		void setW(unsigned short new_w);
-		void setH(unsigned short new_h);
 		
 };
 

@@ -23,10 +23,6 @@ class Player : public Sprite
 	
 		virtual void update();
 		virtual void draw ( BITMAP* );
-
-		virtual Rectangle& getLastBoundingBox();
-		virtual Rectangle& getCurrentBoundingBox();
-		
 };
 
 } // namespace TV

@@ -18,16 +18,12 @@ Player::Player ( std::string location )
 	:
 	Sprite ( location )
 {
-	this->descString = "Player";
+	this->type = "Player";
+	this->description = "Player object";
 
 	this->x = 50;
 	this->y = 70;
 	this->angle = itofix(0);
-	
-	
-	this->currentBBox = new Rectangle ( fixtoi(this->x), fixtoi(this->y),
-		this->width, this->height );	
-	this->lastBBox = new Rectangle ( currentBBox );
 	
 	return;
 }
@@ -49,39 +45,9 @@ void Player::draw ( BITMAP* bitmap )
 
 void Player::update()
 {
-/*	static fixed i = 10;
-
-	//std::cout << "   Last: " << *lastBBox << std::endl;
-	//std::cout << "Current: " << *currentBBox << std::endl;
-	
-	delete ( lastBBox );
-	lastBBox = currentBBox;
-
-	this->x += (i+=ftofix(0.1));
-
-	currentBBox = new Rectangle ( fixtoi(this->x), fixtoi(this->y), this->width, this->height );
-	*/
 	this->x += 1;
 	
 	return;
-}
-
-
-Rectangle& Player::getCurrentBoundingBox()
-{
-	return ( *currentBBox );
-}
-
-
-Rectangle& Player::getLastBoundingBox()
-{
-	return ( *lastBBox );
-}
-
-bool isDirty()
-{
-	return ( true ); //for testing purposes
-
 }
 
 } /* namespace TV */

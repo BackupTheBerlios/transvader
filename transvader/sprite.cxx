@@ -19,7 +19,9 @@ namespace TV
 
 Sprite::Sprite ( std::string location )
 	:
-	angle(0)
+	angle(0),
+	type("Generic"),
+	description("A generic sprite")
 {
 	std::cout << "Attempt to create new sprite from \""
 		<< location << + "\"... " ;
@@ -54,22 +56,24 @@ Sprite::Sprite ( std::string location )
 
 Sprite::~Sprite()
 {
-	//call this->onDestroy(this);
+	//call this->onDestroy(this);
 }
 
-std::string& Sprite::getDescString()
+std::string& Sprite::getDescription()
 {
-	return ( this->descString );
+	return ( this->description );
 }
 
-bool Sprite::isDirty()
+std::string& Sprite::getType()
 {
-	return ( this->dirty );
+	return ( this->type );
 }
 
-/* basic drawing */
+
+/* draw fallback */
 void Sprite::draw ( BITMAP* bitmap )
 {
+		/* FIXME */
 }
 
 } /* namespace TV */

@@ -233,29 +233,9 @@ void Rectangle::setCoordinates (unsigned short new_x, unsigned short new_y, unsi
         this->w = new_w;
 }
 
-void Rectangle::setX ( unsigned short new_x )
-{
-	this->x = new_x;
-}
-
-void Rectangle::setY ( unsigned short new_y )
-{
-	this->y = new_y;
-}
-
-void Rectangle::setW ( unsigned short new_w )
-{
-	this->w = new_w;
-}
-
-void Rectangle::setH ( unsigned short new_h )
-{
-	this->h = new_h;
-}
-
 bool Rectangle::doesTraverse ( Point& point )
 {
-	return ( false ); // edit me
+	return ( false ); //edit me
 }
 
 } /* 

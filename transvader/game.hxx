@@ -16,6 +16,15 @@ namespace TV
 
 class Game : public Application
 {
+	public:
+		Game();
+		~Game();
+                
+		inline void setSpeed ( unsigned short );
+		
+		void run();
+	
+	
 	private:
 		volatile unsigned short speedcounter;
 
@@ -25,8 +34,8 @@ class Game : public Application
 		int install_param_int(void (*proc)(void *), void *, int);
 
 		volatile int fps;
-                volatile int avg_fps;
-                volatile int last_fps;
+        volatile int avg_fps;
+        volatile int last_fps;
 
 
 		Player *player;
@@ -34,19 +43,8 @@ class Game : public Application
 		unsigned short speed;
 
 		void updateData();
-		void updateScreen();
 		
 		Display* display;
-
-	public:
-		Game();
-		~Game();
-                
-		inline void setSpeed ( unsigned short );
-
-		
-		void run();
-
 };
 
 } // namespace TV

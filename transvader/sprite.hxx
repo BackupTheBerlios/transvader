@@ -20,31 +20,26 @@ namespace TV
 class Sprite /* base class */
 {
 	protected:
-		std::string descString;
+		std::string description;
+		std::string type;
+
+
+		unsigned int width, height;
 	
 		BITMAP *default_image;
-	
-		bool dirty;
-	
-		unsigned short width, height;
-		
-		Rectangle *currentBBox, *lastBBox;
-		
+
 	public:
-		/* ! temporarily public ! */
-		int x, y;	
+		/* FIXME: should be protected */
+		unsigned int x, y;	
 		fixed angle;	
 	
 		Sprite ( std::string );
 		virtual ~Sprite();
 	
-		virtual bool isDirty();
 		virtual void update () = 0;
 		virtual void draw ( BITMAP* );
-		virtual std::string& getDescString();
-		
-		virtual Rectangle& getCurrentBoundingBox() = 0;
-		virtual Rectangle& getLastBoundingBox() = 0;
+		virtual std::string& getDescription();
+		virtual std::string& getType();
 };
 
 } /* namespace TV */
