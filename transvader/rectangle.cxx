@@ -1,13 +1,9 @@
 // This file is a part of the Transvader sourcecode. Transvader is a free Asteroids clone distributed under GPL
-// Copyright (C) 2004  Leslie P. Polzer
+// Copyright (C) 2004  Michael Prinzinger
 // The full copyright notice can be found in the file DISCLAIMER at the root of this distribution.
 // This program is distributed under the GNU General Public License, for details read the file LICENSE 
 // at the root of this distribution
 
-#include <string>
-#include <iostream>
-
-#include "exception.hxx"
 
 #include "rectangle.hxx"
 
@@ -40,6 +36,27 @@ w(rect.w),
 h(rect.h)
 {}
 
+/* compares two rectangles and returs if they are equal or not */
+
+bool Rectangle::operator==(Rectangle& rect)
+{
+return(this->x == rect.x && this->y == rect.y && this->w == rect.w && this->h == rect.h);
+}
+
+/* assigns the values of one rectangle to another */
+
+Rectangle& Rectangle::operator=(Rectangle& rect)
+{
+this->x = rect.x;
+this->y = rect.y;
+this->w = rect.w;
+this->h = rect.h;
+
+return(*this);
+}
+
+/* get coordinates of the rectangle */
+
 unsigned short Rectangle::getX()
 {
 	return(this->x);
@@ -58,6 +75,29 @@ unsigned short Rectangle::getW()
 unsigned short Rectangle::getH()
 {
 	return(this->h);
+}
+
+
+/* set coordinates of the rectangle */
+
+void Rectangle::setX(unsigned short new_x)
+{
+	this->x = new_x;
+}
+
+void Rectangle::setY(unsigned short new_y)
+{
+	this->y = new_y;
+}
+
+void Rectangle::setW(unsigned short new_w)
+{
+	this->w = new_w;
+}
+
+void Rectangle::setH(unsigned short new_h)
+{
+	this->h = new_h;
 }
 
 Rectangle::~Rectangle()

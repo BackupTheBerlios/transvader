@@ -16,15 +16,22 @@ class Rectangle
 		Rectangle (unsigned short x,unsigned short y,unsigned short w,unsigned short h );
 		Rectangle ( Rectangle& rect );
 		~Rectangle();
-	
+
+                bool Rectangle::operator==(Rectangle& rect);
+                Rectangle& Rectangle::operator=(Rectangle& rect);
 		bool doesTraverse ( Rectangle& rect );
 		int commonPixels ( Rectangle& rect );
 		Rectangle& unite ( Rectangle& rect );
-		
+
 		unsigned short getX();
 		unsigned short getY();
 		unsigned short getW();
 		unsigned short getH();
+		
+		void setX(unsigned short new_x);
+		void setY(unsigned short new_y);
+		void setW(unsigned short new_w);
+		void setH(unsigned short new_h);
 };
 
 } // namespace TV

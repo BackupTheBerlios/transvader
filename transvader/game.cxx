@@ -93,6 +93,12 @@ void Game::incSpeedCounter ( void *inst )
 }
 END_OF_FUNCTION(incSpeedCounter)
 
+/*
+ * sets the fps counter variable = 0.
+ * called every 1 second by install_param_int_ex above.
+ * it also calculates the average fps value
+ */
+
 void Game::fps_timer(void *inst)
 {
         Game* there = (static_cast<Game*>(inst));
