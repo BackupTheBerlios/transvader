@@ -6,26 +6,45 @@
 
 #include <allegro.h>
 
+#include <libgen.h>	//basename
+
+#include <string>
+
 #include "exception.hxx"
+#include "application.hxx"
+#include "editor.hxx"
 #include "game.hxx"
 
+using TV::Application;
 using TV::Game;
+using TV::Editor;
 using TV::Exception;
 
 int main ( int argc, char** argv )
 {
-	Game* game;
-
+	std::string appname(basename(argv[0]));
+	Application *app;
+	
 	try
 	{
-		game = new Game();
+	
+		if ( appname == "transvader-editor" )
+		{
+			app = new Editor();
+		}
+		else
+		{	
+			app = new Game();
+		}
+		
+		app->run();
+		
+		delete app;
 	}
 	catch ( Exception& ex)
 	{
 		ex.handle();
 	}
-	
-	game->run();
 	
 	return(0);
 }

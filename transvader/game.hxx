@@ -7,13 +7,14 @@
 #ifndef TV_HXX
 #define TV_HXX
 
+#include "application.hxx"
 #include "display.hxx"
 #include "player.hxx"
 
 namespace TV
 {
 
-class Game
+class Game : public Application
 {
 	private:
 		volatile unsigned short speedcounter;

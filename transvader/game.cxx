@@ -139,11 +139,6 @@ END_OF_STATIC_FUNCTION(fps_timer);
 void Game::run()
 {
 	int c = 0;
-	/*int pagenum = 0;
-	BITMAP *page[2];
-
-	page[0] = create_video_bitmap ( SCREEN_W, SCREEN_H );
-	page[1] = create_video_bitmap ( SCREEN_W, SCREEN_H );*/
 
 	this->player = new Player();
 

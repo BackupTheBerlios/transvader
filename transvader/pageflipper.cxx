@@ -41,7 +41,7 @@ Pageflipper::~Pageflipper()
 
 void Pageflipper::draw()
 {
-     show_video_bitmap ( page[pagenum]);
+     show_video_bitmap ( page[pagenum] );
 
      this->pagenum = abs ( this->pagenum - 1 );
 

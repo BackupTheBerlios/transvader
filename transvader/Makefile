@@ -6,16 +6,17 @@
 
 BIN=transvader
 OBJ=main.o sprite.o player.o exception.o game.o rectangle.o backdrop.o foe.o \
-	display.o pageflipper.o
+	display.o pageflipper.o application.o editor.o
 SRC=main.cxx sprite.cxx player.cxx exception.cxx game.cxx rectangle.cxx \
-	backdrop.cxx foe.cxx display.cxx pageflipper.cxx
+	backdrop.cxx foe.cxx display.cxx pageflipper.cxx application.cxx \
+	editor.cxx
     
     
 
 ALLEG_CXXFLAGS=`allegro-config --cflags`
 # linker flags need to be fixed because allegro-config doesn't generate output
 # suitable for separate (i.e. direct ld-call-wise) linking
-ALLEG_LDFLAGS=`allegro-config --libs` #|sed -e 's!-Wl,!!'` \
+ALLEG_LDFLAGS=-lcgui `allegro-config --libs` #|sed -e 's!-Wl,!!'` \
 		#-e _mangled_main_address 
 
 CXX=g++
