@@ -4,10 +4,10 @@
 // This program is distributed under the GNU General Public License, for details read the file LICENSE 
 // at the root of this distribution
 
+#include <string>
 #include <iostream>
 
 #include <stdlib.h>
-#include <string.h>
 #include <stdio.h>
 
 #include <allegro.h>
@@ -29,22 +29,15 @@ Game::Game()
 	/* initialize Allegro */
 	if ( install_allegro ( SYSTEM_AUTODETECT, &errno, atexit ) )
 	{
-		char* errmsg = new char[200];
-		
-		sprintf(errmsg, "Could not initialize Allegro (%s)",
-			strerror(errno) );
-		throw Exception ( errmsg, ERR_FATAL );
+		throw Exception ( std::string("Could not initialize Allegro (")
+			+ strerror(errno) + std::string(")"), ERR_FATAL );
 	}
 	
 	/* init graphics mode */
 	if ( set_gfx_mode ( GFX_AUTODETECT_WINDOWED, 800, 600, 0, 0 ) < 0 )
 	{
-		char* errmsg = new char[200];
-		
-		sprintf(errmsg, "Could not set graphics mode (%s)",
-			allegro_error );
-			
-		throw Exception ( errmsg, ERR_FATAL );
+		throw Exception ( std::string("Could not set graphics mode (")
+			+ allegro_error + std::string(")"), ERR_FATAL );
 	}
 
 	/* set configuration variables */

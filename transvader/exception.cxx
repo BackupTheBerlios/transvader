@@ -4,10 +4,11 @@
 // This program is distributed under the GNU General Public License, for details read the file LICENSE 
 // at the root of this distribution
 
+
+#include <string>
 #include <iostream>
 
 #include <stdlib.h>		/* abort() */
-#include <string.h>
 #include <stdio.h>
 
 #include <allegro.h>
@@ -18,9 +19,9 @@
 namespace TV
 {
 
-Exception::Exception ( const char* error, const severity_t severity )
+Exception::Exception ( std::string error, const severity_t severity )
 {
-	this->error = strdup(error);
+	this->error = error;
 	this->severity = severity;
 	
 	return;
@@ -53,7 +54,7 @@ void Exception::toConsole() const
 }
 
 
-char* Exception::getErrorString() const
+std::string Exception::getErrorString() const
 {
 	return ( this->error );
 }
@@ -65,9 +66,9 @@ severity_t Exception::getSeverity() const
 }
 
 
-char* Exception::getSeverityString() const
+std::string Exception::getSeverityString() const
 {
-	char* errmsg;
+	std::string errmsg;
 
 	switch ( this->severity )
 	{

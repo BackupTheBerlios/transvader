@@ -21,11 +21,11 @@ typedef enum
 class Exception
 {
 	private:
-		char* error;
+		std::string error;
 		severity_t severity;
 	
 	public:
-		Exception ( const char* error = "Unknown Error",
+		Exception ( const std::string error = "Unknown Error",
 			const severity_t severity = ERR_FATAL );
 		~Exception();
 
@@ -33,9 +33,9 @@ class Exception
 		void toConsole() const;
 		
 		/* accessor functions */
-		char* getErrorString() const;
+		std::string getErrorString() const;
 		severity_t getSeverity() const;
-		char* getSeverityString() const;
+		std::string getSeverityString() const;
 };
 
 }

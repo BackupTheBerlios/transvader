@@ -4,9 +4,10 @@
 // This program is distributed under the GNU General Public License, for details read the file LICENSE 
 // at the root of this distribution
 
-
 #include <string>
 #include <iostream>
+
+#include "exception.hxx"
 
 #include "sprite.hxx"
 
@@ -17,10 +18,14 @@ namespace TV
 
 Sprite::Sprite ( std::string location )
 {
-	std::cout << "Attempt to create new sprite \""
+	std::cout << "Attempt to create new sprite from \""
 		<< location << + "\"... " ;
 	
-	this->default_image = load_tga ( location.c_str(), NULL );
+	if ( ( this->default_image = load_tga ( location.c_str(), NULL ) )
+		== NULL )
+	{
+		throw Exception ( "Could not open sprite file " + location, ERR_FATAL );
+	}
 	
 	this->size_x = this->default_image->w;
 	this->size_y = this->default_image->h;
