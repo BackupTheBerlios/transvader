@@ -1,4 +1,9 @@
 # Makefile for Transvader, shamelessly edited for use with MinGW
+# Copyright (C) 2004  Ferdinand Kastl
+# The full copyright notice can be found in the file DISCLAIMER at the root
+# of this distribution.
+# This program is distributed under the GNU General Public License, for details
+# read the file LICENSE at the root of this distribution
 
 BIN=transvader.exe
 OBJ=main.o sprite.o exception.o tv.o
