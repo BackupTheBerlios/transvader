@@ -4,6 +4,7 @@
 // This program is distributed under the GNU General Public License, for details read the file LICENSE 
 // at the root of this distribution
 
+#include <iostream>
 
 #include "rectangle.hxx"
 
@@ -29,7 +30,7 @@ Rectangle::Rectangle ( unsigned short new_x, unsigned short new_y,
 {
 }
 
-Rectangle::Rectangle (Rectangle& rect)
+Rectangle::Rectangle ( Rectangle& rect )
 	:
 	x(rect.x), y(rect.y), w(rect.w), h(rect.h)
 {
@@ -44,7 +45,7 @@ Rectangle::Rectangle ( Rectangle* rect )
 
 /* compares two rectangles and returs if they are equal or not */
 
-bool Rectangle::operator== ( Rectangle& rect )
+bool Rectangle::operator == ( const Rectangle& rect )
 {
 	return ( this->x == rect.x && this->y == rect.y
 		&& this->w == rect.w && this->h == rect.h );
@@ -52,7 +53,7 @@ bool Rectangle::operator== ( Rectangle& rect )
 
 /* assigns the values of one rectangle to another */
 
-Rectangle& Rectangle::operator= ( Rectangle& rect )
+Rectangle& Rectangle::operator = ( Rectangle& rect )
 {
 	this->x = rect.x;
 	this->y = rect.y;
@@ -60,6 +61,14 @@ Rectangle& Rectangle::operator= ( Rectangle& rect )
 	this->h = rect.h;
 
 	return ( *this );
+}
+
+std::ostream& operator << ( std::ostream& out, const Rectangle& rect )
+{
+	out << "[" << rect.x << ", " << rect.y << " / "
+		<< rect.w << "x" << rect.h << "]";
+
+	return out;
 }
 
 bool Rectangle::doesTraverse ( Rectangle& rect )

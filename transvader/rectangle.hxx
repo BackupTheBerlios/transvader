@@ -2,6 +2,8 @@
 #define RECTANGLE_HXX
 
 
+#include <iostream>
+
 #include "types.hxx"
 
 
@@ -16,21 +18,22 @@ class Rectangle
 		unsigned short x, y, w, h;
 		
 		Rectangle ();
-		Rectangle ( unsigned short x, unsigned short y,
-				unsigned short w, unsigned short h );
-		Rectangle ( Rectangle& rect );
-		Rectangle ( Rectangle* rect );		
+		Rectangle ( unsigned short, unsigned short,
+				unsigned short, unsigned short );
+		Rectangle ( Rectangle& );
+		Rectangle ( Rectangle* );		
 		
 		~Rectangle();
 
-                bool Rectangle::operator==(Rectangle& rect);
-                Rectangle& Rectangle::operator=(Rectangle& rect);
+                bool operator == ( const Rectangle& );
+                Rectangle& operator = ( Rectangle& );
+		friend std::ostream& operator << ( std::ostream& , const Rectangle& );
 		
-		bool doesTraverse ( Rectangle& rect );
-		bool doesTraverse ( Point& point );
+		bool doesTraverse ( Rectangle& );
+		bool doesTraverse ( Point& );
 		
-		int commonPixels ( Rectangle& rect );
-		Rectangle& Rectangle::unite(Rectangle& rect);
+		int commonPixels ( Rectangle& );
+		Rectangle& Rectangle::unite ( Rectangle& );
 
 		unsigned short getX();
 		unsigned short getY();
@@ -41,6 +44,7 @@ class Rectangle
 		void setY(unsigned short new_y);
 		void setW(unsigned short new_w);
 		void setH(unsigned short new_h);
+		
 };
 
 } // namespace TV

@@ -67,7 +67,7 @@ Game::Game()
 	install_sound ( DIGI_AUTODETECT, MIDI_AUTODETECT, NULL );
 	clear_to_color ( screen, makecol(0, 0, 0) );
 
-	this->setSpeed(80);
+	this->setSpeed(60);
 	
 	this->display = new Display();
 	
@@ -144,7 +144,15 @@ void Game::run()
 			speedcounter--;
 		}
 
-		this->display->draw();
+
+		vsync();
+		
+		acquire_bitmap(screen);
+		{
+			this->display->draw();
+		}
+		release_bitmap(screen);
+		
 		this->fps++;
 	}
 

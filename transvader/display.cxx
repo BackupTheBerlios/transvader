@@ -47,6 +47,8 @@ void Display::draw()
 	   *	    this routine will then just copy dirty rectangles from the double buffer.
 	   */ 
 
+	static unsigned short j = 0;
+
 	for ( std::list<Sprite*>::const_iterator i = this->sprites.begin();
 		i != this->sprites.end(); i++ )
 	{
@@ -57,14 +59,19 @@ void Display::draw()
 		
 		Rectangle lastBBox ( (*i)->getLastBoundingBox() );
 		
-		BITMAP* black = create_bitmap ( lastBBox.w, 
+		BITMAP* black = create_system_bitmap ( lastBBox.w, 
 			lastBBox.h );
 		
 		clear_to_color ( black, makecol(0, 0, 0) );
+		//clear_to_color ( black, makecol(0, 0, 0) );
 		
+		//std::cout << "deleting" << std::endl ;
 		blit ( black, screen, 0, 0, lastBBox.x, lastBBox.y,
 			lastBBox.w, lastBBox.h );
+	
+		//rest(1000);
 		
+		//std::cout << "redrawing" << std::endl ;
 		(*i)->draw ( screen );
 		
 		destroy_bitmap ( black );

@@ -19,6 +19,11 @@ Player::Player ( std::string location )
 	Sprite ( location )
 {
 	this->descString = "Player";
+
+	this->x = 100;
+	this->y = 300;
+	this->angle = 0;
+	
 	
 	this->currentBBox = new Rectangle ( this->x, this->y, this->width, this->height );	
 	this->lastBBox = new Rectangle ( currentBBox );
@@ -35,13 +40,26 @@ Player::~Player()
 
 void Player::draw ( BITMAP* bitmap )
 {
-	rotate_sprite ( bitmap, this->default_image, 400, 300, this->angle );
+	rotate_sprite ( bitmap, this->default_image, this->x, this->y, itofix(64) );
 
 	return;
 }
 
 void Player::update()
 {
+	static fixed i = 10;
+
+	//std::cout << "   Last: " << *lastBBox << std::endl;
+	//std::cout << "Current: " << *currentBBox << std::endl;
+	
+	delete ( lastBBox );
+	lastBBox = currentBBox;
+	
+	this->x += fixtoi(i+=ftofix(0.1));
+	
+	currentBBox = new Rectangle ( this->x, this->y, this->width, this->height );
+	
+	return;
 }
 
 
@@ -58,7 +76,8 @@ Rectangle& Player::getLastBoundingBox()
 
 bool isDirty()
 {
-	return ( true ); //for testing purposes
+	return ( true ); //for testing purposesError starting shell: /bin/csh
+
 }
 
 } /* namespace TV */
