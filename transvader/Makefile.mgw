@@ -1,0 +1,20 @@
+# Makefile for Transvader, shamelessly edited for use with MinGW
+
+BIN=transvader.exe
+OBJ=main.o sprite.o exception.o tv.o
+SRC=main.cxx sprite.cxx exception.cxx tv.cxx
+
+ALLEG_CXXFLAGS=-lalleg
+CXX=g++
+CXXFLAGS=-ggdb -Wall 
+
+all: transvader
+
+clean:
+	rm -f $(BIN) *.o
+
+%.o: %.cxx
+	$(CXX) $(CXXFLAGS) -c $<
+
+transvader: $(OBJ)
+	$(CXX) $(OBJ) -o $(BIN) $(ALLEG_CXXFLAGS)
