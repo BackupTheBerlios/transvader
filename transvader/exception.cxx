@@ -17,7 +17,7 @@ Exception::Exception ( const char* error, const severity_t severity )
 Exception::~Exception() {}
 
 
-void Exception::handle()
+void Exception::handle() const
 {
 	this->toConsole();
 
@@ -32,7 +32,7 @@ void Exception::handle()
 }
 
 
-void Exception::toConsole()
+void Exception::toConsole() const
 {
 	allegro_message ( "transvader: %s: %s\n", this->getSeverityString(),
 		this->getErrorString() );
@@ -41,19 +41,19 @@ void Exception::toConsole()
 }
 
 
-char* Exception::getErrorString()
+char* Exception::getErrorString() const
 {
 	return ( this->error );
 }
 
 
-severity_t Exception::getSeverity()
+severity_t Exception::getSeverity() const
 {
 	return ( this->severity );
 }
 
 
-char* Exception::getSeverityString()
+char* Exception::getSeverityString() const
 {
 	char* errmsg;
 

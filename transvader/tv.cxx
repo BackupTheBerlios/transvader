@@ -61,7 +61,7 @@ TV::~TV()
 	return;
 }
 
-void TV::run()
+void TV::run() const
 {
 	
 
