@@ -19,7 +19,8 @@ ALLEG_LDFLAGS=`allegro-config --libs` #|sed -e 's!-Wl,!!'` \
 		#-e _mangled_main_address 
 
 CXX=g++
-CXXFLAGS=-O2 -pg -ggdb -Wall $(ALLEG_CXXFLAGS)
+CXXFLAGS=-O3 -pg -ggdb -W -Wall -Wuninitialized \
+	 	$(ALLEG_CXXFLAGS)
 LDFLAGS=-lm -pg $(ALLEG_LDFLAGS)
 
 all: transvader
