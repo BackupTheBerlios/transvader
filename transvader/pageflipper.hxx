@@ -12,10 +12,8 @@ class Pageflipper : public Display
 {
         
         private:
-               BITMAP *backbuf;
-               BITMAP *framebuf;
-               BITMAP *activebuf;
-	       BITMAP *inactivebuf;
+               BITMAP *page[2];
+		unsigned short pagenum;
 
         public:
                Pageflipper ( int width, int height );

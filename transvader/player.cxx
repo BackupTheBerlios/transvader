@@ -20,8 +20,8 @@ Player::Player ( std::string location )
 {
 	this->descString = "Player";
 
-	this->x = itofix(50);
-	this->y = itofix(70);
+	this->x = 50;
+	this->y = 70;
 	this->angle = itofix(0);
 	
 	
@@ -41,8 +41,8 @@ Player::~Player()
 
 void Player::draw ( BITMAP* bitmap )
 {
-	rotate_sprite ( bitmap, this->default_image, fixtoi(this->x),
-		fixtoi(this->y), itofix(64) );
+	rotate_sprite ( bitmap, this->default_image, this->x,
+		this->y, 0 );
 
 	return;
 }
@@ -61,7 +61,7 @@ void Player::update()
 
 	currentBBox = new Rectangle ( fixtoi(this->x), fixtoi(this->y), this->width, this->height );
 	*/
-	this->x += ftofix(1.0);
+	this->x += 1;
 	
 	return;
 }
@@ -80,7 +80,7 @@ Rectangle& Player::getLastBoundingBox()
 
 bool isDirty()
 {
-	return ( true ); //for testing purposesError starting shell: /bin/csh
+	return ( true ); //for testing purposes
 
 }
 

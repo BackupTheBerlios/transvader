@@ -38,6 +38,14 @@ Sprite::Sprite ( std::string location )
 		<< bitmap_color_depth ( this->default_image )
 		<< std::endl ;
 	
+	/* pageflipper only, fixme */
+	BITMAP *tmp = create_video_bitmap ( this->width, this->height );
+	if ( tmp != NULL )
+	{
+		destroy_bitmap(this->default_image);
+		this->default_image = tmp;
+	}
+	
 	return;
 }
 

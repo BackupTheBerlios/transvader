@@ -32,7 +32,7 @@ class Sprite /* base class */
 		
 	public:
 		/* ! temporarily public ! */
-		fixed x, y;	
+		int x, y;	
 		fixed angle;	
 	
 		Sprite ( std::string );

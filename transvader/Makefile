@@ -36,3 +36,8 @@ clean:
 transvader: $(OBJ)
 	$(CXX) $(LDFLAGS) $(OBJ) -o $(BIN)
 
+docs: doxygen.conf $(SRC)
+	doxygen doxygen.conf
+
+docs-upload: docs
+	scp -r doc sky@shell.berlios.de:/home/groups/transvader/htdocs

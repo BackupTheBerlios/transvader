@@ -22,10 +22,10 @@ namespace TV
 {
 
 /* hackish, subject to change */
-const unsigned short res_x = 640;
-const unsigned short res_y = 480;
-const unsigned short depth =   8;
-const unsigned short gameSpeed =   40;
+const unsigned short res_x = 800;
+const unsigned short res_y = 600;
+const unsigned short depth =   32;
+const unsigned short gameSpeed =   50;
 
 /*
  * initialize drivers and some things more
@@ -85,7 +85,7 @@ Game::Game()
 
 	this->setSpeed(gameSpeed);
 
-	this->display = new Pageflipper(res_x, res_y);
+	this->display = new Pageflipper ( SCREEN_W, SCREEN_H );
 	
 	return;
 
@@ -93,7 +93,7 @@ Game::Game()
 
 Game::~Game()
 {
-	delete ( this->display );
+	//delete ( this->display );
 
 	allegro_exit();
 	
@@ -139,18 +139,20 @@ END_OF_STATIC_FUNCTION(fps_timer);
 void Game::run()
 {
 	int c = 0;
+	/*int pagenum = 0;
+	BITMAP *page[2];
+
+	page[0] = create_video_bitmap ( SCREEN_W, SCREEN_H );
+	page[1] = create_video_bitmap ( SCREEN_W, SCREEN_H );*/
 
 	this->player = new Player();
 
-	while ( ( c >> 8 ) != KEY_ESC )
+	while ( !key[KEY_ESC] )
 	{
 		if ( keyboard_needs_poll() )
 		{
 			poll_keyboard();
 		}
-
-		if ( keypressed() )
-			c = readkey();
 
 		while ( this->speedcounter > 0 )
 		{
@@ -158,43 +160,25 @@ void Game::run()
 			speedcounter--;
 		}
 
-/*		vsync();
-
-		acquire_bitmap(screen);
-		{
-			BITMAP *black = create_bitmap ( 800, 20 );
-
-			clear_to_color ( black, makecol(0,0,0) );
+		clear_bitmap ( this->display->getBitmap() );
 		
-			blit ( black, screen, 0, 0, 0, 0, 800, 20 );
-		
-
-			textprintf ( screen, font, 0, 10,
-				makecol(0, 235, 0),
-				"Cycles left: %d | Angle: %d | Player: (%d,%d)",
-				this->speedcounter, fixtoi(this->player->angle),
-				fixtoi(this->player->x), fixtoi(this->player->y)
-
+		textprintf ( this->display->getBitmap(), font, 0, 10,
+			makecol(0, 235, 0),
+			"Cycles left: %d | Angle: %d | Player: (%d,%d)",
+			this->speedcounter, fixtoi(this->player->angle),
+			fixtoi(this->player->x), fixtoi(this->player->y)
 				);
 
+		/* write current and average fps on top of screen */
+        	textprintf ( this->display->getBitmap(), font, 0, 0, makecol(0,200,0),
+			"FPS: %d  Average FPS: %d",
+			this->last_fps, this->avg_fps);
 
-			/* write current and average fps on top of screen */
-	        	/*textprintf(screen, font, 0, 0, makecol(0,200,0),
-				"FPS: %d  Average FPS: %d",
-				this->last_fps, this->avg_fps);
-
-			destroy_bitmap ( black );
-		}
-		{
-                        this->display->draw();
-		}
-		release_bitmap(screen);
-		
-		this->fps++;*/
-		
 		this->player->draw ( this->display->getBitmap() );
 		
 		this->display->draw();
+		
+		this->fps++;
 	}
 
 	delete ( this->player );
@@ -217,18 +201,6 @@ void Game::updateData()
  */
 void Game::updateScreen()
 {
-	vsync();
-	acquire_bitmap ( screen );
-	//clear_bitmap ( screen );
-	
-	/* write debugging information to top of screen */
-
-
-	/* draw player sprite */
-	this->player->draw ( screen );
-
-	release_bitmap ( screen );
-	
 	return;
 }
 
