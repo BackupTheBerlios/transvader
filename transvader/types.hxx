@@ -3,7 +3,19 @@
 // The full copyright notice can be found in the file DISCLAIMER at the root of this distribution.
 // This program is distributed under the GNU General Public License, for details read the file LICENSE 
 // at the root of this distribution
+
+#define TYPES_HXX
+
+
+
+namespace TV
+{
+
 struct POINT
 {
 	short x,y;
 };
+
+} // namespace TV
+
+#endi
