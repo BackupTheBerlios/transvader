@@ -43,7 +43,9 @@ Rectangle::Rectangle ( Rectangle* rect )
 }
 
 
-/* compares two rectangles and returs if they are equal or not */
+/* 
+ * compares two rectangles and returs if they are equal or not 
+ */
 
 bool Rectangle::operator == ( const Rectangle& rect )
 {
@@ -51,7 +53,9 @@ bool Rectangle::operator == ( const Rectangle& rect )
 		&& this->w == rect.w && this->h == rect.h );
 }
 
-/* assigns the values of one rectangle to another */
+/* 
+ * assigns the values of one rectangle to another 
+ */
 
 Rectangle& Rectangle::operator = ( Rectangle& rect )
 {
@@ -87,7 +91,9 @@ bool Rectangle::doesTraverse ( Rectangle& rect )
 	return(false);
 }
 
-/* combines two rectangles to one*/
+/* 
+ * combines two rectangles to one 
+ */
 
 Rectangle& Rectangle::operator + ( Rectangle& rect)
 {
@@ -111,39 +117,20 @@ Rectangle& Rectangle::operator + ( Rectangle& rect)
 
 }
 
-/* calculates the amount of pixels both rectangles share with each other */
+/* 
+ * calculates the amount of pixels both rectangles share with each other 
+ */
 
 int Rectangle::commonPixels ( Rectangle& rect )
 {
-    /* unnecessary because of similar function commonRectangle
-
-    int common_w = 0;
-    int common_h = 0;
-
-    if( (this->y + this->h) < (rect.y + rect.h) )
-        common_h = rect.h  - ( (rect.y + rect.h) - (this->y + this->h) );
-    else if ( (this->y + this->h) > (rect.y + rect.h) )
-        common_h = this->h - ( (this->y + this->h) - (rect.y + rect.h) );
-    else
-        common_h = this->h;
-
-    if( (this->x + this->w) < (rect.x + rect.w) )
-        common_w = rect.w  - ( (rect.x + rect.w) - (this->x + this->w) );
-    else if ( (this->x + this->w) > (rect.x + rect.w) )
-        common_w = this->w - ( (this->x + this->w) - (rect.x + rect.w) );
-    else
-        common_w = this->w;
-
-    return(common_h * common_w); 
-    
-    */
-
     rect = commonRectangle ( rect);
     return ( rect.h * rect.w );
 
 }
 
-/* returns the Rectangle two traversing Rectangles share */
+/* 
+ * returns the Rectangle two traversing Rectangles share 
+ */
 
 Rectangle& Rectangle::commonRectangle ( Rectangle& rect)
 {
@@ -190,7 +177,9 @@ Rectangle& Rectangle::commonRectangle ( Rectangle& rect)
     return( *this );
 }
 
-/* get coordinates of the rectangle */
+/* 
+ * get coordinates of the rectangle 
+ */
 
 unsigned short Rectangle::getX()
 {
@@ -213,7 +202,9 @@ unsigned short Rectangle::getH()
 }
 
 
-/* set coordinates of the rectangle */
+/* 
+ * set coordinates of the rectangle 
+ */
 
 void Rectangle::setX ( unsigned short new_x )
 {
@@ -240,4 +231,6 @@ bool Rectangle::doesTraverse ( Point& point )
 	return ( false ); // edit me
 }
 
-} /* namespace TV */
+} /* 
+   * namespace TV 
+   */

@@ -17,14 +17,14 @@ class Display
 		std::list <Sprite*> sprites;
 		std::list <Rectangle*> old_sprites;
 
-		void invalidateRect( const Rectangle& r );
+		void invalidateRect( const Rectangle& );
 		void findRectangles();
 
 	public:
 		Display();
 		~Display();
 	
-		void addSprite ( Sprite* sprite );
+		void addSprite ( Sprite* );
 		
 		void prepare();
 		void optimize();

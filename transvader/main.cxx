@@ -20,7 +20,7 @@ int main ( int argc, char** argv )
 	{
 		game = new Game();
 	}
-	catch ( Exception& ex )
+	catch ( Exception& ex)
 	{
 		ex.handle();
 	}

@@ -15,7 +15,7 @@ namespace TV
 {
 
 
-Backdrop::Backdrop ( std::string location )
+Backdrop::Backdrop ( std::string location)
 	:
 	Sprite ( location )
 {
@@ -27,7 +27,7 @@ Backdrop::~Backdrop()
 {
 }
 
-void Backdrop::draw ( BITMAP* bitmap )
+void Backdrop::draw ( BITMAP* )
 {
 }
 
