@@ -5,10 +5,13 @@
 // at the root of this distribution
 
 #include <allegro.h>
-
-#include <libgen.h>	//basename
-
 #include <string>
+
+#ifdef ALLEGRO_WINDOWS
+#include "basename.c"
+#else
+#include <libgen.h>
+#endif
 
 #include "exception.hxx"
 #include "application.hxx"

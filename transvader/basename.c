@@ -28,7 +28,7 @@ char* basename(const char* path)
 	{
 		if (*(path + i) == '/')
 		{
-			subString = malloc(strlen(path) - i);
+			subString = (char*) malloc(strlen(path) - i);
 			
 			for (j = i +1 ; j < strlen(path); j++)
 			{
