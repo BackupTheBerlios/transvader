@@ -19,7 +19,8 @@ class Game
 		BITMAP* dblbuffer;
 		
 		unsigned short speed;
-		
+
+
 		void updateScreen() const;
 
 	public:
