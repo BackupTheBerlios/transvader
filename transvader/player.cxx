@@ -8,7 +8,6 @@
 #include <iostream>
 
 
-
 #include "player.hxx"
 
 
@@ -19,6 +18,11 @@ Player::Player ( std::string location )
 	:
 	Sprite ( location )
 {
+	this->descString = "Player";
+	
+	this->currentBBox = new Rectangle ( this->x, this->y, this->width, this->height );	
+	this->lastBBox = new Rectangle ( currentBBox );
+	
 	return;
 }
 
@@ -38,31 +42,23 @@ void Player::draw ( BITMAP* bitmap )
 
 void Player::update()
 {
-	while ( keypressed() )
-	{
-	
-	int c = readkey() >> 8;
-	
-	if ( c == KEY_LEFT )
-	{
-		this->angle -= itofix(1); // turning speed
-	}
-
-	if ( c == KEY_RIGHT )
-	{
-		this->angle += itofix(1); // turning speed
-	}
-	
-	}
-
-
-	return;
 }
 
 
-Rectangle* Player::getBoundingBox()
+Rectangle& Player::getCurrentBoundingBox()
 {
-	return ( new Rectangle ( this->x, this->y, this->width, this->height ) );
+	return ( *currentBBox );
+}
+
+
+Rectangle& Player::getLastBoundingBox()
+{
+	return ( *lastBBox );
+}
+
+bool isDirty()
+{
+	return ( true ); //for testing purposes
 }
 
 } /* namespace TV */

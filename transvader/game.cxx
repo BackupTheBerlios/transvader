@@ -77,6 +77,8 @@ Game::Game()
 
 Game::~Game()
 {
+	delete ( this->display );
+
 	allegro_exit();
 	
 	return;

@@ -1,5 +1,5 @@
 // This file is a part of the Transvader sourcecode. Transvader is a free Asteroids clone distributed under GPL
-// Copyright (C) 2004  Michael Prinzinger
+// Copyright (C) 2004  Michael Prinzinger, Leslie Polzer
 // The full copyright notice can be found in the file DISCLAIMER at the root of this distribution.
 // This program is distributed under the GNU General Public License, for details read the file LICENSE 
 // at the root of this distribution
@@ -24,14 +24,23 @@ Rectangle::~Rectangle()
 
 Rectangle::Rectangle ( unsigned short new_x, unsigned short new_y,
 			unsigned short new_w,unsigned short new_h )
-	: x(new_x), y(new_y), w(new_w), h(new_h)
+	:
+	x(new_x), y(new_y), w(new_w), h(new_h)
 {
 }
 
 Rectangle::Rectangle (Rectangle& rect)
-	: x(rect.x), y(rect.y), w(rect.w), h(rect.h)
+	:
+	x(rect.x), y(rect.y), w(rect.w), h(rect.h)
 {
 }
+
+Rectangle::Rectangle ( Rectangle* rect )
+	:
+	x(rect->x), y(rect->y), w(rect->w), h(rect->h)
+{
+}
+
 
 /* compares two rectangles and returs if they are equal or not */
 

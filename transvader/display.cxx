@@ -1,6 +1,8 @@
 
 #include <list>
+#include <iostream>
 
+#include "sprite.hxx"
 #include "display.hxx"
 
 namespace TV
@@ -20,15 +22,17 @@ Display::~Display()
 
 void Display::addSprite ( Sprite *sprite )
 {
+	std::cout << "Display::addSprite(): adding sprite \""
+		<< sprite->getDescString() << "\"..." << std::endl ;
+
 	this->sprites.push_back ( sprite );
-	this->old_sprites.push_back ( sprite->getBoundingBox() );
 	
 	return;
 }
 
 /**
  * optimize our list of dirty rectangles:
- * 	- unite overlapping rectangles (maybe only if not too many new objects have to be added) 
+ * 	- unite overlapping rectangles (maybe; only if not too many new objects have to be added) 
  */
 void Display::optimize()
 {
@@ -38,6 +42,36 @@ void Display::optimize()
 
 void Display::draw()
 {
+	/**
+	   * fixme: this all should go into prepare(), which will draw to the double buffer.
+	   *	    this routine will then just copy dirty rectangles from the double buffer.
+	   */ 
+
+	for ( std::list<Sprite*>::const_iterator i = this->sprites.begin();
+		i != this->sprites.end(); i++ )
+	{
+		if ( !((*i)->isDirty()) )
+		{
+			continue;
+		}
+		
+		Rectangle lastBBox ( (*i)->getLastBoundingBox() );
+		
+		BITMAP* black = create_bitmap ( lastBBox.w, 
+			lastBBox.h );
+		
+		clear_to_color ( black, makecol(0, 0, 0) );
+		
+		blit ( black, screen, 0, 0, lastBBox.x, lastBBox.y,
+			lastBBox.w, lastBBox.h );
+		
+		(*i)->draw ( screen );
+		
+		destroy_bitmap ( black );
+	}
+
+
+
 	return;
 }
 

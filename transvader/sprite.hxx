@@ -20,12 +20,16 @@ namespace TV
 class Sprite /* base class */
 {
 	protected:
+		std::string descString;
+	
 		BITMAP *default_image;
 	
 		bool dirty;
 	
 		fixed x, y;
 		unsigned short width, height;
+		
+		Rectangle *currentBBox, *lastBBox;
 		
 	public:
 		fixed angle;	
@@ -36,8 +40,10 @@ class Sprite /* base class */
 		virtual bool isDirty();
 		virtual void update () = 0;
 		virtual void draw ( BITMAP* bitmap );
+		virtual std::string& getDescString();
 		
-		virtual Rectangle* getBoundingBox() = 0;
+		virtual Rectangle& getCurrentBoundingBox() = 0;
+		virtual Rectangle& getLastBoundingBox() = 0;
 };
 
 } /* namespace TV */

@@ -47,6 +47,11 @@ Sprite::~Sprite()
 	//call this->onDestroy(this);
 }
 
+std::string& Sprite::getDescString()
+{
+	return ( this->descString );
+}
+
 bool Sprite::isDirty()
 {
 	return ( this->dirty );
