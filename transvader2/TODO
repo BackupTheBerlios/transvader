@@ -1,0 +1,2 @@
+- add missing error checking on Allegro calls
+- use smart pointers

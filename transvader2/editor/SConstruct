@@ -1,0 +1,46 @@
+# Polzer/2004
+
+import os;
+
+CCFLAGS = ''
+LINKFLAGS = ''
+CPPPATH = '../include'
+
+# strategy for QTDIR:
+# check if it is set
+#   - if yes, use it and skip auto-detection
+#   - if no, try to find it automatically
+# also! check if library is qt or qt-mt
+
+sources = [Split("""main.cxx
+	dragobject.cxx
+	maingui.cxx
+	palette.cxx
+	preview.cxx""")]
+
+
+env = Environment( tools = ['default', 'qt'] );
+dict = env.Dictionary();
+
+if ( not dict.has_key('QTDIR') ):
+	env['QTDIR'] = None 
+
+if ( env['QTDIR'] is None ):	
+	print "QTDIR not set, attempting autodetection..."
+	qt_locations = [ "/usr/qt", "/usr/qt3", \
+		"/usr/lib/qt", "/usr/lib/qt3", \
+		"/opt/qt", "/opt/qt3", \
+		"/usr/local/qt", "/usr/local/qt3" ]
+	for loc in qt_locations:
+		print "\tSearching in '" + loc + "'..."
+		if ( os.path.exists(loc) ):
+			print "\t" + loc + " exists!"
+			env["QTDIR"] = loc
+			break
+# FIXME: qt-mt
+
+#print env['TOOLS']
+#print env['CPPPATH']
+env['CPPPATH'].append(CPPPATH);
+
+env.Program ( 'transvader-editor', sources ) 

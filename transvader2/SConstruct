@@ -1,0 +1,11 @@
+# Polzer/2004
+
+CPPPATH = './include'
+
+env = Environment ( CPPPATH='include' )
+
+if env['PLATFORM'] == 'win32':
+	print "Detected Windows environment, skipping editor..."
+	SConscript(['game/SConstruct'])
+else:
+	SConscript(['game/SConstruct', 'editor/SConstruct'])
