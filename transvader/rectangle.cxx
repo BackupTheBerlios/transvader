@@ -65,6 +65,8 @@ else if ( (this->y + this-> h) > (rect.y) )
 else if ( (this->y) < (rect.y + rect.h) )
      return( ( (this->y + this->h) > (rect.y) ) && ( (this->x + this->w) > (rect.x) )
           || ( (this->y + this->h) > (rect.y) ) && ( (this->x )          > (rect.x) ) );
+
+return(false);
 }
 
 /* combines two rectangles to one*/
