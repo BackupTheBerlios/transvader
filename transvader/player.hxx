@@ -21,7 +21,8 @@ class Player : public Sprite
 		Player ( std::string location = "data/player/level3.bmp" );
 		virtual ~Player();
 	
-	virtual void draw ( BITMAP* bitmap ) const;
+		virtual void update();
+		virtual void draw ( BITMAP* bitmap );
 };
 
 } // namespace TV

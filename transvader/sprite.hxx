@@ -20,14 +20,17 @@ class Sprite /* base class */
 	protected:
 		BITMAP *default_image;
 	
-		unsigned short x, y;
-		unsigned short size_x, size_y;
+		fixed x, y;
+		unsigned short width, height;
 	
 	public:
+		fixed angle;	
+	
 		Sprite ( std::string filename );
 		virtual ~Sprite();
 	
-		virtual void draw ( BITMAP* bitmap ) const;
+		virtual void update () = 0;
+		virtual void draw ( BITMAP* bitmap );
 };
 
 } /* namespace TV */

@@ -7,6 +7,8 @@
 #include <string>
 #include <iostream>
 
+
+
 #include "player.hxx"
 
 
@@ -27,12 +29,32 @@ Player::~Player()
 }
 
 
-void Player::draw ( BITMAP* bitmap ) const
+void Player::draw ( BITMAP* bitmap )
 {
-	static int i = 0;
+	rotate_sprite ( bitmap, this->default_image, 400, 300, this->angle );
 
-	rotate_sprite ( bitmap, this->default_image, 400, 300, (i += 5) << 16 );
-	//draw_sprite ( bitmap, this->default_image, 400, 300 );
+	return;
+}
+
+void Player::update()
+{
+	while ( keypressed() )
+	{
+	
+	int c = readkey() >> 8;
+	
+	if ( c == KEY_LEFT )
+	{
+		this->angle -= itofix(1); // turning speed
+	}
+
+	if ( c == KEY_RIGHT )
+	{
+		this->angle += itofix(1); // turning speed
+	}
+	
+	}
+
 
 	return;
 }

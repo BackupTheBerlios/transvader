@@ -17,6 +17,8 @@ namespace TV
 
 
 Sprite::Sprite ( std::string location )
+	:
+	angle(0)
 {
 	std::cout << "Attempt to create new sprite from \""
 		<< location << + "\"... " ;
@@ -27,11 +29,11 @@ Sprite::Sprite ( std::string location )
 		throw Exception ( "Could not open sprite file " + location, ERR_FATAL );
 	}
 	
-	this->size_x = this->default_image->w;
-	this->size_y = this->default_image->h;
+	this->width = this->default_image->w;
+	this->height = this->default_image->h;
 	
-	std::cout << "succeeded, dimensions " << this->size_x
-		<< "x" << this->size_y << "x"
+	std::cout << "succeeded, dimensions " << this->width
+		<< "x" << this->height << "x"
 		<< bitmap_color_depth ( this->default_image )
 		<< std::endl ;
 	
@@ -44,7 +46,7 @@ Sprite::~Sprite()
 }
 
 /* basic drawing */
-void Sprite::draw ( BITMAP* bitmap ) const
+void Sprite::draw ( BITMAP* bitmap )
 {
 }
 

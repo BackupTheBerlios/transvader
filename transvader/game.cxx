@@ -56,12 +56,10 @@ Game::Game()
 	install_timer();
 	install_sound ( DIGI_AUTODETECT, MIDI_AUTODETECT, NULL );
 	
-	clear_to_color ( screen, makecol16(0, 0, 0) );
+	clear_to_color ( screen, makecol(0, 0, 0) );
 
-	this->setSpeed(60);
+	this->setSpeed(80);
 	
-	std::cout << "Game::Game(): finished.\n" << std::endl ;
-
 	return;
 }
 
@@ -104,8 +102,24 @@ void Game::run()
 		if ( keypressed() )
 			c = readkey();
 
+		while ( this->speedcounter > 0 )
+		{
+			this->updateData();
+			speedcounter--;
+		}
+
 		this->updateScreen();
 	}
+
+	return;
+}
+
+/*
+ * update game data
+ */
+void Game::updateData()
+{
+	this->player->update();
 
 	return;
 }
@@ -117,12 +131,13 @@ void Game::updateScreen()
 {
 	vsync();
 	acquire_bitmap ( screen );
-	clear_bitmap ( screen );
+	//clear_bitmap ( screen );
 	
 	/* write debugging information to top of screen */
 	textprintf ( screen, font, 0, 0,
-		makecol16(0, 200, 0),
-		"Cycles left: %d", this->speedcounter);
+		makecol(0, 235, 0),
+		"Cycles left: %d | Angle: %d",
+		this->speedcounter, fixtoi(this->player->angle) );
 	
 	/* draw player sprite */
 	this->player->draw ( screen );

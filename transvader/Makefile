@@ -16,7 +16,7 @@ ALLEG_LDFLAGS=`allegro-config --libs` #|sed -e 's!-Wl,!!'` \
 
 CXX=g++
 CXXFLAGS=-O2 -pg -ggdb -Wall $(ALLEG_CXXFLAGS)
-LDFLAGS=-pg $(ALLEG_LDFLAGS)
+LDFLAGS=-lm -pg $(ALLEG_LDFLAGS)
 
 all: transvader
 

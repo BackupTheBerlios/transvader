@@ -22,7 +22,7 @@ class Game
 		
 		unsigned short speed;
 
-
+		void updateData();
 		void updateScreen();
 
 	public:
