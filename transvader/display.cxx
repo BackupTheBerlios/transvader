@@ -32,7 +32,8 @@ void Display::addSprite ( Sprite *sprite )
 
 /**
  * optimize our list of dirty rectangles:
- * 	- unite overlapping rectangles (maybe; only if not too many new objects have to be added) 
+ * 	- unite overlapping rectangles (maybe; only if not too many new objects have to be added)
+ *	- sort rectangles by their coordinates: higher rects go first 
  */
 void Display::optimize()
 {
